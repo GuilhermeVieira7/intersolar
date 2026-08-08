@@ -11,79 +11,78 @@ const AppComercial = () => {
   });
 
   const handleCalculateClick = () => {
-    const simEl = document.getElementById('simulador');
-    if (simEl) {
-      simEl.scrollIntoView({ behavior: 'smooth' });
+    const simElem = document.getElementById('simulador');
+    if (simElem) {
+      simElem.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
     <div className="app-comercial-wrapper">
-      {/* Custom Cursor */}
-      <window.Cursor cursorState={cursorState} />
+      {/* Magnetic Custom Cursor */}
+      <Cursor cursorState={cursorState} />
 
-      {/* Navigation Header */}
-      <window.Nav setCursorState={setCursorState} />
+      {/* Floating WhatsApp Conversion CTA */}
+      <FloatingWhatsApp />
 
+      {/* Commercial Header Navigation */}
+      <Nav setCursorState={setCursorState} />
+
+      {/* Main Experience Body */}
       <main>
-        {/* Hero Commercial */}
-        <window.HeroComercial
+        {/* Split Conversion Hero */}
+        <HeroComercial
           setCursorState={setCursorState}
           onCalculateClick={handleCalculateClick}
-          tweaks={tweaks}
         />
 
-        {/* Simulator */}
-        <window.Simulator setCursorState={setCursorState} />
+        {/* Interactive Solar Expenditure & Savings Simulator */}
+        <Simulator setCursorState={setCursorState} />
 
-        {/* Energy Flow */}
-        <window.EnergyFlowComercial setCursorState={setCursorState} />
+        {/* Interactive Energy Flow Path */}
+        <EnergyFlowComercial />
 
-        {/* Process */}
-        <window.ProcessComercial setCursorState={setCursorState} />
+        {/* Process Timeline */}
+        <ProcessComercial />
 
-        {/* Services */}
-        <window.ServicesComercial setCursorState={setCursorState} />
+        {/* Complete Scope of Services */}
+        <ServicesComercial />
 
-        {/* Dashboard */}
-        <window.DashboardComercial setCursorState={setCursorState} />
+        {/* Telemetry Energy Dashboard (Simulated) */}
+        <DashboardComercial />
 
-        {/* Benefits */}
-        <window.Benefits setCursorState={setCursorState} />
+        {/* 3 Pillars of Value */}
+        <Benefits setCursorState={setCursorState} />
 
-        {/* Differentials */}
-        <window.Differentials setCursorState={setCursorState} />
+        {/* Integrated Engineering Differential */}
+        <Differentials setCursorState={setCursorState} />
 
-        {/* Parauapebas */}
-        <window.ParauapebasComercial setCursorState={setCursorState} />
+        {/* Parauapebas Regional Positioning */}
+        <ParauapebasComercial />
 
-        {/* Projects */}
-        <window.ProjectsComercial setCursorState={setCursorState} />
+        {/* Field Executed Projects Portfolio */}
+        <ProjectsComercial setCursorState={setCursorState} />
 
-        {/* Trust */}
-        <window.TrustComercial setCursorState={setCursorState} />
+        {/* Instagram Real Metrics & Proof */}
+        <TrustComercial setCursorState={setCursorState} />
 
-        {/* FAQ */}
-        <window.FAQComercial setCursorState={setCursorState} />
+        {/* Frequently Asked Questions */}
+        <FAQComercial setCursorState={setCursorState} />
 
-        {/* Final CTA */}
-        <window.FinalCTAComercial
-          setCursorState={setCursorState}
+        {/* Final Decision CTA */}
+        <FinalCTAComercial
           onCalculateClick={handleCalculateClick}
+          setCursorState={setCursorState}
         />
       </main>
 
-      {/* Footer */}
-      <window.FooterComercial setCursorState={setCursorState} />
+      {/* Commercial Footer */}
+      <FooterComercial />
 
-      {/* Tweaks Panel */}
-      <window.Tweaks tweaks={tweaks} setTweaks={setTweaks} />
+      {/* Developer Interactive Tweaks Panel */}
+      <Tweaks tweaks={tweaks} setTweaks={setTweaks} />
     </div>
   );
 };
 
-// Mount App
-const rootEl = document.getElementById('root');
-if (rootEl) {
-  ReactDOM.createRoot(rootEl).render(<AppComercial />);
-}
+window.AppComercial = AppComercial;
