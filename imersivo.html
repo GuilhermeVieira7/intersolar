@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Primary Tags -->
+  <title>Intersolar | Experiência Imersiva de Energia Solar em Parauapebas</title>
+  <meta name="description" content="Especialistas em energia solar em Parauapebas e região. Projeto, instalação e homologação completa." />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Intersolar",
+    "description": "Especialistas em Energia Solar. Projeto, instalação e homologação completa.",
+    "areaServed": "Parauapebas e região",
+    "sameAs": ["https://www.instagram.com/intersolarpa"]
+  }
+  </script>
+
+  <!-- React 18 & Babel Standalone CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;700&family=Inter+Tight:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --color-solar-black: #0b0d0c;
+      --color-graphite: #151817;
+      --color-graphite-light: #202422;
+      --color-warm-white: #f4f2ea;
+      --color-solar-yellow: #ffc400;
+      --color-solar-orange: #ff7a00;
+      --color-energy-green: #123c2a;
+      --color-muted-grey: #8a928e;
+      --color-border-dark: rgba(244, 242, 234, 0.12);
+      --color-glow-yellow: rgba(255, 196, 0, 0.35);
+      
+      --accent-color: var(--color-solar-yellow);
+      --accent-glow: var(--color-glow-yellow);
+      
+      --font-display: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Geist Mono', monospace;
+      
+      --gutter: clamp(1.25rem, 4vw, 4rem);
+      --max-width: 1440px;
+      --header-height: 80px;
+      
+      --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      background-color: var(--color-solar-black);
+      color: var(--color-warm-white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body { width: 100%; min-height: 100vh; background-color: var(--color-solar-black); overflow-x: hidden; }
+
+    .grid-overlay {
+      position: fixed; inset: 0; pointer-events: none; z-index: 999;
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gutter);
+      padding: 0 var(--gutter); opacity: 0.04;
+    }
+    .grid-overlay div { border-left: 1px solid var(--color-warm-white); border-right: 1px solid var(--color-warm-white); height: 100%; }
+
+    .bg-noise {
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1;
+    }
+
+    ::selection { background-color: var(--accent-color); color: var(--color-solar-black); }
+
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; text-wrap: balance; }
+    p { text-wrap: pretty; }
+
+    .mono-tag {
+      font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--accent-color); display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .mono-tag::before { content: ''; display: inline-block; width: 6px; height: 6px; background-color: var(--accent-color); border-radius: 50%; }
+
+    .hero-heading {
+      font-size: clamp(3.5rem, 8.5vw, 9.5rem); font-weight: 900; line-height: 0.9; letter-spacing: -0.04em; margin-bottom: 1.5rem; color: var(--color-warm-white);
+    }
+    .hero-heading .solar-word {
+      color: transparent; background: linear-gradient(135deg, #ffffff 0%, var(--accent-color) 60%, var(--color-solar-orange) 100%);
+      -webkit-background-clip: text; background-clip: text; display: inline-block;
+    }
+    .hero-heading .engineering-word {
+      font-style: italic; font-weight: 400; color: var(--color-warm-white);
+      background: linear-gradient(90deg, var(--color-warm-white) 0%, rgba(244, 242, 234, 0.6) 100%);
+      -webkit-background-clip: text; background-clip: text;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 1rem; background-color: var(--accent-color); color: var(--color-solar-black);
+      font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; letter-spacing: 0.05em; padding: 1.25rem 2.25rem;
+      border-radius: 9999px; border: 1px solid var(--accent-color); cursor: pointer; text-decoration: none;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px var(--accent-glow); background-color: #ffffff; }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.75rem; background: transparent; color: var(--color-warm-white);
+      font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.05em; padding: 1.25rem 2rem;
+      border-radius: 9999px; border: 1px solid var(--color-border-dark); cursor: pointer; text-decoration: none;
+      transition: border-color var(--transition-fast), color var(--transition-fast), background-color var(--transition-fast);
+    }
+    .btn-secondary:hover { border-color: var(--accent-color); color: var(--accent-color); background-color: rgba(255, 196, 0, 0.04); }
+
+    .site-header {
+      position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); z-index: 100; padding: 0 var(--gutter);
+      display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(244, 242, 234, 0.06); background: rgba(11, 13, 12, 0.75);
+    }
+    .logo-brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--color-warm-white); }
+    .logo-icon { width: 32px; height: 32px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--accent-color), var(--color-solar-orange)); box-shadow: 0 0 12px var(--accent-glow); display: flex; align-items: center; justify-content: center; }
+    .logo-text { font-family: var(--font-display); font-weight: 900; font-size: 1.25rem; letter-spacing: -0.02em; }
+    .chapter-indicator { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-muted-grey); display: flex; align-items: center; gap: 0.5rem; }
+    .chapter-indicator span { color: var(--accent-color); }
+
+    .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    .section { position: relative; padding: clamp(5rem, 10vw, 10rem) 0; z-index: 2; }
+    .section-dark { background-color: var(--color-solar-black); color: var(--color-warm-white); }
+    .section-light { background-color: var(--color-warm-white); color: var(--color-solar-black); }
+    .section-light .mono-tag { color: var(--color-energy-green); }
+    .section-light .mono-tag::before { background-color: var(--color-energy-green); }
+
+    .custom-cursor {
+      position: fixed; top: 0; left: 0; width: 12px; height: 12px; background-color: var(--accent-color); border-radius: 50%;
+      pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    .custom-cursor.hovered { width: 48px; height: 48px; background-color: rgba(255, 196, 0, 0.2); border: 1px solid var(--accent-color); backdrop-filter: blur(4px); }
+    .custom-cursor-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-warm-white); text-transform: uppercase; }
+
+    .tweaks-panel { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9000; background: rgba(21, 24, 23, 0.92); border: 1px solid var(--color-border-dark); backdrop-filter: blur(16px); border-radius: 16px; padding: 1.25rem; box-shadow: 0 20px 40px rgba(0,0,0,0.6); width: 280px; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .tweaks-panel.minimized { transform: translateY(calc(100% - 44px)); }
+    .tweaks-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; cursor: pointer; }
+    .tweaks-title { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; color: var(--accent-color); display: flex; align-items: center; gap: 0.5rem; }
+    .tweaks-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-muted-grey); text-transform: uppercase; margin-bottom: 0.35rem; display: block; }
+    .tweaks-options { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+    .tweaks-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--color-warm-white); font-family: var(--font-mono); font-size: 0.65rem; padding: 0.25rem 0.6rem; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; }
+    .tweaks-btn:hover, .tweaks-btn.active { background: var(--accent-color); color: var(--color-solar-black); border-color: var(--accent-color); }
+
+    .glass-card { background: rgba(21, 24, 23, 0.6); border: 1px solid var(--color-border-dark); border-radius: 20px; padding: clamp(1.5rem, 3vw, 3rem); backdrop-filter: blur(10px); }
+
+    @keyframes pulseGlow { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 0.9; transform: scale(1.05); } }
+
+    @media (max-width: 768px) {
+      .hero-heading { font-size: clamp(2.5rem, 11vw, 4.5rem); }
+      .custom-cursor { display: none !important; }
+      .tweaks-panel { bottom: 0.75rem; right: 0.75rem; width: calc(100vw - 1.5rem); }
+      .site-header { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // --- CURSOR COMPONENT ---
+    const Cursor = ({ cursorState }) => {
+      const [pos, setPos] = useState({ x: -100, y: -100 });
+      const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+      useEffect(() => {
+        setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+        const handleMouseMove = (e) => setPos({ x: e.clientX, y: e.clientY });
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+      }, []);
+
+      if (isTouchDevice) return null;
+      const isHovered = Boolean(cursorState?.text);
+
+      return (
+        <div className={`custom-cursor ${isHovered ? 'hovered' : ''}`} style={{ left: `${pos.x}px`, top: `${pos.y}px` }}>
+          {isHovered && <span className="custom-cursor-text">{cursorState.text}</span>}
+        </div>
+      );
+    };
+
+    // --- SOLAR SYSTEM CANVAS ENGINE ---
+    const SolarSystem = ({ isExpanding, tweaks }) => {
+      const canvasRef = useRef(null);
+
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let animationFrameId;
+
+        let width = (canvas.width = canvas.parentElement.clientWidth);
+        let height = (canvas.height = canvas.parentElement.clientHeight);
+
+        const handleResize = () => {
+          if (!canvas.parentElement) return;
+          width = canvas.width = canvas.parentElement.clientWidth;
+          height = canvas.height = canvas.parentElement.clientHeight;
+        };
+        window.addEventListener('resize', handleResize);
+
+        const mouse = { x: width / 2, y: height / 2, targetX: width / 2, targetY: height / 2 };
+        const handleMouseMove = (e) => {
+          const rect = canvas.getBoundingClientRect();
+          mouse.targetX = e.clientX - rect.left;
+          mouse.targetY = e.clientY - rect.top;
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+
+        const numParticles = tweaks?.particles === false ? 0 : (tweaks?.motion === 'low' ? 60 : tweaks?.motion === 'high' ? 220 : 130);
+        const particles = [];
+
+        for (let i = 0; i < numParticles; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const dist = 80 + Math.random() * (Math.min(width, height) * 0.35);
+          particles.push({
+            x: width / 2 + Math.cos(angle) * dist,
+            y: height / 2 + Math.sin(angle) * dist,
+            baseAngle: angle,
+            baseDist: dist,
+            size: Math.random() * 2.2 + 0.6,
+            speed: (Math.random() * 0.008 + 0.002) * (tweaks?.motion === 'low' ? 0.5 : tweaks?.motion === 'high' ? 1.8 : 1),
+            opacity: Math.random() * 0.7 + 0.3
+          });
+        }
+
+        let expansionFactor = 1;
+        let shockwaveRadius = 0;
+
+        const render = () => {
+          ctx.clearRect(0, 0, width, height);
+
+          mouse.x += (mouse.targetX - mouse.x) * 0.05;
+          mouse.y += (mouse.targetY - mouse.y) * 0.05;
+
+          const centerX = width / 2;
+          const centerY = height / 2;
+
+          if (isExpanding) {
+            expansionFactor += 0.08;
+            shockwaveRadius += 35;
+          } else {
+            expansionFactor += (1 - expansionFactor) * 0.05;
+            shockwaveRadius = 0;
+          }
+
+          const sunRadius = Math.min(width, height) * 0.16 * expansionFactor;
+
+          // Rings
+          ctx.save();
+          ctx.translate(centerX, centerY);
+          for (let r = 1; r <= 3; r++) {
+            ctx.beginPath();
+            ctx.arc(0, 0, sunRadius * (1.6 + r * 0.45), 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(255, 196, 0, ${0.12 / r})`;
+            ctx.setLineDash([8 + r * 4, 12 + r * 6]);
+            ctx.rotate((Date.now() * 0.0002) * (r % 2 === 0 ? 1 : -1));
+            ctx.stroke();
+          }
+          ctx.restore();
+
+          // Glow
+          if (tweaks?.glow !== false) {
+            const glowGrad = ctx.createRadialGradient(
+              centerX + (mouse.x - centerX) * 0.08, centerY + (mouse.y - centerY) * 0.08, sunRadius * 0.2,
+              centerX, centerY, sunRadius * 2.8
+            );
+            glowGrad.addColorStop(0, 'rgba(255, 220, 100, 0.9)');
+            glowGrad.addColorStop(0.25, 'rgba(255, 196, 0, 0.45)');
+            glowGrad.addColorStop(0.65, 'rgba(255, 122, 0, 0.18)');
+            glowGrad.addColorStop(1, 'rgba(11, 13, 12, 0)');
+            ctx.fillStyle = glowGrad;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, sunRadius * 2.8, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          // Core
+          const computedAccent = (getComputedStyle(document.documentElement).getPropertyValue('--accent-color') || '#FFC400').trim();
+          const coreGrad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, sunRadius);
+          coreGrad.addColorStop(0, '#FFFFFF');
+          coreGrad.addColorStop(0.3, computedAccent || '#FFC400');
+          coreGrad.addColorStop(0.8, '#FF7A00');
+          coreGrad.addColorStop(1, 'rgba(255, 122, 0, 0)');
+          ctx.fillStyle = coreGrad;
+          ctx.beginPath();
+          ctx.arc(centerX, centerY, sunRadius, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Particles
+          particles.forEach((p) => {
+            p.baseAngle += p.speed;
+            const dx = mouse.x - (centerX + Math.cos(p.baseAngle) * p.baseDist);
+            const dy = mouse.y - (centerY + Math.sin(p.baseAngle) * p.baseDist);
+            const distToMouse = Math.sqrt(dx * dx + dy * dy);
+            const mouseFactor = distToMouse < 180 ? (1 - distToMouse / 180) * 25 : 0;
+
+            const currentDist = p.baseDist * expansionFactor + mouseFactor;
+            const pX = centerX + Math.cos(p.baseAngle) * currentDist;
+            const pY = centerY + Math.sin(p.baseAngle) * currentDist;
+
+            ctx.beginPath();
+            ctx.arc(pX, pY, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 220, 140, ${p.opacity})`;
+            ctx.fill();
+          });
+
+          if (isExpanding && shockwaveRadius > 0) {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, shockwaveRadius, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(255, 196, 0, 0.7)';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+          }
+
+          animationFrameId = requestAnimationFrame(render);
+        };
+
+        render();
+        return () => {
+          cancelAnimationFrame(animationFrameId);
+          window.removeEventListener('resize', handleResize);
+          window.removeEventListener('mousemove', handleMouseMove);
+        };
+      }, [isExpanding, tweaks]);
+
+      return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }} />;
+    };
+
+    // --- HERO ---
+    const Hero = ({ setCursorState, onExploreClick, isExpanding, tweaks }) => (
+      <section className="hero-section" id="hero">
+        <div className="hero-canvas-container">
+          <SolarSystem isExpanding={isExpanding} tweaks={tweaks} />
+        </div>
+        <div className="hero-content container">
+          <div className="hero-badge-wrap">
+            <span className="mono-tag">INTERSOLAR</span>
+            <span className="hero-badge-divider">/</span>
+            <span className="hero-badge-sub">ENERGIA SOLAR · PARAUAPEBAS</span>
+          </div>
+          <h1 className="hero-heading">
+            A energia começa no <span className="solar-word">sol.</span><br />
+            <span className="engineering-word">O resto é engenharia.</span>
+          </h1>
+          <p className="hero-subtext">
+            Projeto, instalação e homologação completa para transformar o potencial solar do seu imóvel em energia.
+          </p>
+          <div className="hero-cta-group">
+            <a href="https://wa.me/5594999999999" target="_blank" rel="noopener noreferrer" className="btn-primary" onMouseEnter={() => setCursorState({ text: 'WHATSAPP' })} onMouseLeave={() => setCursorState({ text: null })}>
+              <span>SOLICITAR ORÇAMENTO</span><span className="arrow">→</span>
+            </a>
+            <button type="button" className="btn-secondary" onClick={onExploreClick} onMouseEnter={() => setCursorState({ text: 'EXPLORAR' })} onMouseLeave={() => setCursorState({ text: null })}>
+              <span>EXPLORAR A EXPERIÊNCIA</span><span>↓</span>
+            </button>
+          </div>
+        </div>
+        <div className="hero-footer container">
+          <div><span className="mono-label">LOCALIZAÇÃO</span><br /><span className="hero-footer-val">PARAUAPEBAS + REGIÃO</span></div>
+          <div className="hero-scroll-prompt" onClick={onExploreClick}><span>SCROLL TO DISCOVER</span><div className="scroll-bar-line"></div></div>
+        </div>
+        <style>{`
+          .hero-section { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding-top: calc(var(--header-height) + 2rem); padding-bottom: 2rem; overflow: hidden; background: radial-gradient(circle at 50% 50%, rgba(21, 24, 23, 0.4) 0%, var(--color-solar-black) 90%); }
+          .hero-canvas-container { position: absolute; inset: 0; z-index: 1; }
+          .hero-content { position: relative; z-index: 10; max-width: 1100px; margin-top: auto; margin-bottom: auto; padding-top: 3rem; }
+          .hero-badge-wrap { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.75rem; }
+          .hero-badge-divider { color: var(--color-border-dark); font-family: var(--font-mono); }
+          .hero-badge-sub { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-muted-grey); letter-spacing: 0.1em; }
+          .hero-subtext { font-size: clamp(1.1rem, 2vw, 1.5rem); color: rgba(244, 242, 234, 0.82); max-width: 680px; font-weight: 300; line-height: 1.5; margin-bottom: 2.75rem; }
+          .hero-cta-group { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+          .hero-footer { position: relative; z-index: 10; display: flex; align-items: flex-end; justify-content: space-between; border-top: 1px solid rgba(244, 242, 234, 0.08); padding-top: 1.5rem; margin-top: 2rem; }
+          .mono-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-muted-grey); letter-spacing: 0.15em; }
+          .hero-footer-val { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--color-warm-white); }
+          .hero-scroll-prompt { display: flex; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-muted-grey); letter-spacing: 0.12em; cursor: pointer; }
+          .scroll-bar-line { width: 40px; height: 1px; background-color: var(--color-muted-grey); position: relative; overflow: hidden; }
+          .scroll-bar-line::after { content: ''; position: absolute; left: 0; top: 0; width: 50%; height: 100%; background-color: var(--accent-color); animation: slideScrollLine 2s infinite cubic-bezier(0.65, 0, 0.35, 1); }
+          @keyframes slideScrollLine { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+        `}</style>
+      </section>
+    );
+
+    // --- ENERGY FLOW ---
+    const EnergyFlow = ({ setCursorState }) => {
+      const [activeStep, setActiveStep] = useState(1);
+      const canvasRef = useRef(null);
+
+      const steps = [
+        { id: 0, label: 'SOL', sub: 'RADIAÇÃO', verb: 'ORIGEM', desc: 'Emissão contínua de fótons de alta densidade energética.' },
+        { id: 1, label: 'PAINÉIS', sub: 'CAPTAÇÃO', verb: 'CAPTAÇÃO', desc: 'Transformação de fótons em corrente contínua (CC) através de células fotovoltaicas.' },
+        { id: 2, label: 'INVERSOR', sub: 'CONVERSÃO', verb: 'CONVERSÃO', desc: 'Conversão inteligente de corrente contínua em corrente alternada (CA) trifásica/monofásica.' },
+        { id: 3, label: 'IMÓVEL', sub: 'UTILIZAÇÃO', verb: 'ENERGIA', desc: 'Abastecimento imediato da infraestrutura elétrica residencial ou comercial.' },
+        { id: 4, label: 'CONSUMO', sub: 'EFICIÊNCIA', verb: 'SEU IMÓVEL', desc: 'Autonomia real com injeção do excedente na rede da concessionária local.' }
+      ];
+
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let animationFrameId;
+
+        let w = (canvas.width = canvas.parentElement.clientWidth);
+        let h = (canvas.height = canvas.parentElement.clientHeight);
+
+        const render = () => {
+          ctx.clearRect(0, 0, w, h);
+          const margin = 80;
+          const nodeY = h / 2;
+          const stepWidth = (w - margin * 2) / (steps.length - 1);
+
+          ctx.beginPath(); ctx.moveTo(margin, nodeY); ctx.lineTo(w - margin, nodeY);
+          ctx.strokeStyle = 'rgba(244, 242, 234, 0.1)'; ctx.lineWidth = 2; ctx.stroke();
+
+          const computedAccent = (getComputedStyle(document.documentElement).getPropertyValue('--accent-color') || '#FFC400').trim();
+          const activeX = margin + activeStep * stepWidth;
+          ctx.beginPath(); ctx.moveTo(margin, nodeY); ctx.lineTo(activeX, nodeY);
+          ctx.strokeStyle = computedAccent || '#FFC400'; ctx.lineWidth = 3; ctx.stroke();
+
+          animationFrameId = requestAnimationFrame(render);
+        };
+        render();
+        return () => cancelAnimationFrame(animationFrameId);
+      }, [activeStep]);
+
+      return (
+        <section className="section section-dark" id="da-luz-a-energia">
+          <div className="container">
+            <div className="section-header-wrap" style={{ marginBottom: '3.5rem' }}>
+              <span className="mono-tag">CAPÍTULO 01 · O SOL</span>
+              <h2 className="section-title" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '1rem' }}>Tudo começa com luz.</h2>
+              <p className="section-desc" style={{ fontSize: '1.15rem', color: 'var(--color-muted-grey)', maxWidth: '600px' }}>
+                Visualização da jornada fotovoltaica. Passe o cursor sobre cada etapa para examinar a transformação em tempo real.
+              </p>
+            </div>
+
+            <div className="flow-timeline-nav" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', borderBottom: '1px solid var(--color-border-dark)', paddingBottom: '1rem', marginBottom: '2.5rem' }}>
+              {steps.map((st, idx) => (
+                <div key={st.id} className="flow-nav-item" style={{ cursor: 'pointer', opacity: activeStep === idx ? 1 : 0.4 }} onClick={() => setActiveStep(idx)} onMouseEnter={() => setCursorState({ text: st.verb })} onMouseLeave={() => setCursorState({ text: null })}>
+                  <span className="flow-nav-num" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--accent-color)' }}>0{idx + 1}</span><br />
+                  <span className="flow-nav-label" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem' }}>{st.verb}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="glass-card" style={{ minHeight: '380px', position: 'relative' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
+                {steps.map((st, idx) => (
+                  <div key={st.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }} onClick={() => setActiveStep(idx)}>
+                    <div style={{ width: '20px', height: '20px', borderRadius: '50%', border: activeStep === idx ? '2px solid var(--accent-color)' : '2px solid var(--color-warm-white)', backgroundColor: activeStep === idx ? 'var(--accent-color)' : 'transparent', marginBottom: '0.5rem' }} />
+                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.85rem' }}>{st.label}</span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-muted-grey)' }}>{st.sub}</span>
+                  </div>
+                ))}
+              </div>
+              <div style={{ background: 'rgba(11, 13, 12, 0.85)', border: '1px solid var(--color-border-dark)', borderRadius: '12px', padding: '1.5rem 2rem' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--accent-color)' }}>● ETAPA 0{activeStep + 1} DE 05</span>
+                <h3 style={{ fontSize: '1.35rem', margin: '0.4rem 0' }}>{steps[activeStep].label} — {steps[activeStep].sub}</h3>
+                <p style={{ fontSize: '0.95rem', color: 'rgba(244, 242, 234, 0.8)' }}>{steps[activeStep].desc}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // --- PROBLEM ---
+    const Problem = () => (
+      <section className="section section-light" id="o-problema">
+        <div className="container">
+          <div style={{ maxWidth: '1000px', marginBottom: '4rem' }}>
+            <span className="mono-tag">ENERGIA É INFRAESTRUTURA</span>
+            <h2 style={{ fontSize: 'clamp(2.8rem, 6vw, 6rem)', color: 'var(--color-solar-black)', marginTop: '1.5rem', lineHeight: 0.95 }}>Você não controla o preço da energia.</h2>
+            <div style={{ height: '3rem' }} />
+            <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', color: 'var(--color-energy-green)', lineHeight: 0.95 }}>Mas pode repensar a forma como a consome.</h2>
+          </div>
+          <div style={{ background: '#EFECE3', border: '1px solid rgba(11, 13, 12, 0.12)', borderRadius: '24px', padding: '2.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem', fontFamily: 'var(--font-mono)', fontSize: '0.75rem' }}>
+              <div><span style={{ color: '#D32F2F', fontWeight: 'bold' }}>— CUSTO CONVENCIONAL (INFLAÇÃO ENERGÉTICA)</span></div>
+              <div><span style={{ color: '#123C2A', fontWeight: 'bold' }}>— GERAÇÃO SOLAR (ESTABILIDADE PREVISTA)</span></div>
+              <span style={{ color: 'var(--color-energy-green)', background: 'rgba(18, 60, 42, 0.08)', padding: '0.3rem 0.8rem', borderRadius: '99px' }}>MODELO CONCEITUUAL</span>
+            </div>
+            <p style={{ fontSize: '1.05rem', color: 'rgba(11, 13, 12, 0.8)' }}>
+              A energia convencional expõe residências e empresas a revisões tarifárias imprevisíveis. A transição para um ativo fotovoltaico transforma uma despesa contínua e incerta em um investimento patrimonial de longo prazo.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+
+    // --- DIFFERENCE ---
+    const Difference = ({ setCursorState }) => {
+      const lines = [
+        { num: '01', title: 'Projetamos sistemas.', desc: 'Estudo minucioso de orientação solar, sombreamento, curvas de consumo e eficiência de carga.' },
+        { num: '02', title: 'Instalamos sistemas.', desc: 'Execução técnica rigorosa com equipamentos normatizados e engenheiros especializados em Parauapebas.' },
+        { num: '03', title: 'Colocamos sistemas para funcionar.', desc: 'Testes de comissionamento, calibração do inversor e sincronização da geração.' },
+        { num: '04', title: 'Do projeto à homologação.', desc: 'Trâmite burocrático integral perante a concessionária local sem desgastes para o cliente.' }
+      ];
+
+      return (
+        <section className="section section-dark" id="a-diferenca">
+          <div className="container">
+            <div style={{ marginBottom: '4rem' }}>
+              <span className="mono-tag">CAPÍTULO 02 · A ENGENHARIA</span>
+              <h2 style={{ fontSize: 'clamp(3rem, 7vw, 7.5rem)', marginTop: '1rem', color: 'var(--color-warm-white)' }}>Não vendemos apenas painéis.</h2>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+              {lines.map((l) => (
+                <div key={l.num} style={{ borderTop: '1px solid var(--color-border-dark)', paddingTop: '2rem' }} onMouseEnter={() => setCursorState({ text: 'DISCOVER' })} onMouseLeave={() => setCursorState({ text: null })}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.25rem', color: 'var(--accent-color)', fontWeight: 700 }}>{l.num}</span>
+                  <h3 style={{ fontSize: 'clamp(2rem, 4.5vw, 4.5rem)', margin: '0.5rem 0' }}>{l.title}</h3>
+                  <p style={{ fontSize: '1.15rem', color: 'var(--color-muted-grey)', maxWidth: '700px' }}>{l.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // --- SERVICES ---
+    const Services = ({ setCursorState }) => {
+      const servicesList = [
+        { id: '01', title: 'PROJETO', desc: 'Transformamos o consumo e as características do imóvel em uma solução fotovoltaica dimensionada para a realidade do cliente.' },
+        { id: '02', title: 'DIMENSIONAMENTO', desc: 'Análise minuciosa da demanda energética atual e projeção de consumo futuro.' },
+        { id: '03', title: 'INSTALAÇÃO', desc: 'Fixação técnica em telhados ou solo, cabeamento normatizado e inversores de alta eficiência.' },
+        { id: '04', title: 'HOMOLOGAÇÃO', desc: 'Gestão completa da documentação e vistoria junto à concessionária local.' },
+        { id: '05', title: 'ACOMPANHAMENTO', desc: 'Suporte pós-instalação para garantia de operacionalidade e monitoramento em tempo real.' }
+      ];
+
+      return (
+        <section className="section section-dark" id="servicos">
+          <div className="container">
+            <span className="mono-tag">CAPÍTULO 03 · O SISTEMA</span>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3.5rem' }}>Engenharia de Ponta a Ponta.</h2>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {servicesList.map((srv) => (
+                <div key={srv.id} style={{ borderTop: '1px solid var(--color-border-dark)', padding: '2rem 0' }} onMouseEnter={() => setCursorState({ text: 'EXPLORAR' })} onMouseLeave={() => setCursorState({ text: null })}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent-color)' }}>{srv.id}</span>
+                    <h3 style={{ fontSize: 'clamp(2rem, 4.5vw, 4rem)' }}>{srv.title}</h3>
+                  </div>
+                  <p style={{ fontSize: '1.1rem', color: 'rgba(244, 242, 234, 0.8)', marginTop: '1rem', maxWidth: '800px', marginLeft: '4rem' }}>{srv.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // --- SYSTEM ---
+    const System = () => (
+      <section className="section section-dark" id="sistema-jornada">
+        <div className="container">
+          <span className="mono-tag">METODOLOGIA DE EXECUÇÃO</span>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3rem' }}>UM SISTEMA. UMA JORNADA.</h2>
+          <div className="glass-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+            {['01 DIAGNÓSTICO', '02 ANÁLISE', '03 DIMENSIONAMENTO', '04 PROJETO', '05 INSTALAÇÃO', '06 HOMOLOGAÇÃO'].map((st) => (
+              <div key={st} style={{ border: '1px solid var(--color-border-dark)', padding: '1.25rem', borderRadius: '12px', background: 'rgba(11,13,12,0.6)' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--accent-color)' }}>{st}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+
+    // --- DASHBOARD ---
+    const Dashboard = () => (
+      <section className="section section-dark" id="dashboard">
+        <div className="container">
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--accent-color)', marginBottom: '1rem' }}>
+            <span>DADOS DEMONSTRATIVOS / INTERFACE DE TELEMETRIA</span>
+            <span>SIMULAÇÃO DE APLICATIVO INTERSOLAR</span>
+          </div>
+          <div className="glass-card" style={{ background: 'rgba(15, 18, 17, 0.95)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--color-border-dark)', paddingBottom: '1rem', marginBottom: '1.5rem', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+              <span>⚡ INTERSOLAR ENERGY SYSTEM</span>
+              <span style={{ color: '#00E676' }}>● ONLINE (LIVE DEMO)</span>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
+              <div style={{ background: 'rgba(11,13,12,0.8)', padding: '1.25rem', borderRadius: '12px' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-muted-grey)' }}>GERAÇÃO SOLAR</span>
+                <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.75rem', color: 'var(--accent-color)', marginTop: '0.5rem' }}>14.8 kW</h3>
+              </div>
+              <div style={{ background: 'rgba(11,13,12,0.8)', padding: '1.25rem', borderRadius: '12px' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-muted-grey)' }}>INJEÇÃO NA REDE</span>
+                <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.75rem', color: '#00E676', marginTop: '0.5rem' }}>8.2 kW</h3>
+              </div>
+              <div style={{ background: 'rgba(11,13,12,0.8)', padding: '1.25rem', borderRadius: '12px' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-muted-grey)' }}>CONSUMO INSTANTÂNEO</span>
+                <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.75rem', color: 'var(--color-warm-white)', marginTop: '0.5rem' }}>6.6 kW</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    // --- BEFORE AFTER ---
+    const BeforeAfter = () => (
+      <section className="section section-dark" id="antes-depois">
+        <div className="container">
+          <span className="mono-tag">VISÃO DE IMPACTO PATRIMONIAL</span>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3.5rem' }}>A Transformação do Imóvel.</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+            <div className="glass-card" style={{ borderLeft: '3px solid #D32F2F' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#FF5252' }}>ANTES</span>
+              <h3 style={{ fontSize: '2rem', margin: '0.5rem 0 1.5rem 0' }}>Dependência Energética</h3>
+              <p style={{ color: 'var(--color-muted-grey)' }}>Conta passiva contínua, vulnerabilidade a bandeiras tarifárias e ausência de retorno patrimonial.</p>
+            </div>
+            <div className="glass-card" style={{ borderLeft: '3px solid var(--accent-color)' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--accent-color)' }}>DEPOIS</span>
+              <h3 style={{ fontSize: '2rem', margin: '0.5rem 0 1.5rem 0' }}>Autonomia Fotovoltaica</h3>
+              <p style={{ color: 'var(--color-muted-grey)' }}>Ativo de geração própria, previsibilidade de custos e solução completa homologada pela Intersolar.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    // --- TRUST ---
+    const Trust = ({ setCursorState }) => (
+      <section className="section section-dark" id="confianca">
+        <div className="container">
+          <span className="mono-tag">PROVA DE CONFIANÇA VERIFICADA</span>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3.5rem' }}>Tecnologia importa. Confiança também.</h2>
+          <div className="glass-card" style={{ maxWidth: '800px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '1.5rem' }}>
+              <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--accent-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>☀️</div>
+              <div>
+                <h3 style={{ fontSize: '1.5rem' }}>@intersolarpa</h3>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--accent-color)' }}>CONTA OFICIAL VERIFICADA</span>
+              </div>
+            </div>
+            <p style={{ fontSize: '1.1rem', marginBottom: '2rem', background: 'rgba(11,13,12,0.5)', padding: '1.25rem', borderRadius: '12px' }}>
+              ☀️ Especialistas em Energia Solar<br />📍 Parauapebas e região<br />🔧 Projeto, instalação e homologação completa
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', borderTop: '1px solid var(--color-border-dark)', paddingTop: '1.25rem' }}>
+              <div style={{ textAlign: 'center' }}><span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.75rem', color: 'var(--accent-color)', fontWeight: 700 }}>2.555</span><br /><span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-muted-grey)' }}>SEGUIDORES REAIS</span></div>
+              <div style={{ textAlign: 'center' }}><span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.75rem', color: 'var(--accent-color)', fontWeight: 700 }}>275</span><br /><span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-muted-grey)' }}>PUBLICAÇÕES</span></div>
+              <div style={{ textAlign: 'center' }}><span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.75rem', color: 'var(--accent-color)', fontWeight: 700 }}>100%</span><br /><span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-muted-grey)' }}>REGIONAL</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    // --- PROJECTS ---
+    const Projects = ({ setCursorState }) => (
+      <section className="section section-dark" id="projetos">
+        <div className="container">
+          <span className="mono-tag">GALERIA DE EXECUÇÃO TÉCNICA</span>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3.5rem' }}>Portfólio de Engenharia.</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+            {[1, 2, 3, 4].map((n) => (
+              <div key={n} className="glass-card" style={{ minHeight: '280px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} onMouseEnter={() => setCursorState({ text: 'VER PROJETO' })} onMouseLeave={() => setCursorState({ text: null })}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--accent-color)', border: '1px dashed var(--accent-color)', padding: '0.5rem', borderRadius: '6px' }}>[IMAGEM REAL DO PROJETO 0{n}]</span>
+                <div>
+                  <h4 style={{ fontSize: '1.25rem', marginTop: '1rem' }}>PROJETO FOTOVOLTAICO 0{n}</h4>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--color-muted-grey)' }}>PARAUAPEBAS / PA</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+
+    // --- PARAUAPEBAS ---
+    const Parauapebas = () => (
+      <section className="section section-dark" id="parauapebas">
+        <div className="container">
+          <span className="mono-tag">PRESENÇA E ENGENHARIA LOCAL</span>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5rem)', marginTop: '1rem', marginBottom: '1.5rem' }}>Feito para a realidade da nossa região.</h2>
+          <p style={{ fontSize: '1.25rem', color: 'rgba(244, 242, 234, 0.85)', maxWidth: '750px' }}>
+            Atendemos Parauapebas e região com uma solução que começa no entendimento do imóvel e termina com o sistema pronto para operar.
+          </p>
+        </div>
+      </section>
+    );
+
+    // --- FAQ ---
+    const FAQ = ({ setCursorState }) => {
+      const [openIdx, setOpenIdx] = useState(0);
+      const faqItems = [
+        { q: 'Quanto custa um projeto solar?', a: 'O investimento exato depende da curva de consumo do imóvel e da potência de pico necessária. Projetamos cada sistema sob medida.' },
+        { q: 'Quanto posso economizar na conta?', a: 'O sistema reduz a dependência da tarifa da concessionária ao gerar a própria energia no local.' },
+        { q: 'Vocês fazem a instalação completa?', a: 'Sim. Gerenciamos 100% da instalação física, incluindo painéis, cabeamento blindado e inversores.' },
+        { q: 'Vocês cuidam da homologação?', a: 'Sim. Cuidamos de todos os trâmites burocráticos e vistorias perante a distribuidora local.' },
+        { q: 'Atendem minha região além de Parauapebas?', a: 'Atendemos Parauapebas e toda a região circunvizinha com equipe própria.' },
+        { q: 'Preciso entender de energia solar?', a: 'Não. Entregamos o sistema instalado e homologado com suporte completo.' }
+      ];
+
+      return (
+        <section className="section section-dark" id="faq">
+          <div className="container">
+            <span className="mono-tag">ESCLARECIMENTOS TÉCNICOS</span>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3.5rem' }}>Perguntas Frequentes.</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+              <div>
+                {faqItems.map((item, idx) => (
+                  <div key={idx} style={{ padding: '1.25rem 0', borderTop: '1px solid var(--color-border-dark)', cursor: 'pointer', color: openIdx === idx ? 'var(--accent-color)' : 'var(--color-warm-white)' }} onClick={() => setOpenIdx(idx)}>
+                    <h3 style={{ fontSize: '1.2rem' }}>0{idx + 1}. {item.q}</h3>
+                  </div>
+                ))}
+              </div>
+              <div className="glass-card">
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--accent-color)' }}>RESPOSTA OFICIAL</span>
+                <h3 style={{ fontSize: '1.35rem', margin: '1rem 0' }}>{faqItems[openIdx].q}</h3>
+                <p style={{ fontSize: '1.05rem', color: 'rgba(244, 242, 234, 0.85)', lineHeight: 1.6 }}>{faqItems[openIdx].a}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // --- FINAL CTA ---
+    const FinalCTA = ({ setCursorState }) => (
+      <section className="section section-dark" id="contato" style={{ textAlign: 'center', background: '#060707', padding: '8rem 0' }}>
+        <div className="container">
+          <span className="mono-tag">CAPÍTULO 06 · O FUTURO</span>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)', marginTop: '1.5rem' }}>O próximo passo começa com uma pergunta.</h2>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', color: 'var(--accent-color)', margin: '0.5rem 0 2.5rem 0' }}>Quanto o seu imóvel pode gerar?</h2>
+          <a href="https://wa.me/5594999999999" target="_blank" rel="noopener noreferrer" className="btn-primary" onMouseEnter={() => setCursorState({ text: 'ORÇAMENTO' })} onMouseLeave={() => setCursorState({ text: null })}>
+            <span>SOLICITAR ORÇAMENTO</span><span>→</span>
+          </a>
+        </div>
+      </section>
+    );
+
+    // --- FOOTER ---
+    const Footer = () => (
+      <footer style={{ background: 'var(--color-solar-black)', borderTop: '1px solid var(--color-border-dark)', padding: '4rem 0 2rem 0', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
+          <div>
+            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', color: 'var(--color-warm-white)' }}>INTERSOLAR</h3>
+            <span style={{ color: 'var(--accent-color)' }}>ENERGIA SOLAR · PARAUAPEBAS + REGIÃO</span>
+          </div>
+          <div>
+            <span>INSTAGRAM: @INTERSOLARPA</span><br />
+            <span>© 2026 Intersolar. Todos os direitos reservados.</span>
+          </div>
+        </div>
+      </footer>
+    );
+
+    // --- TWEAKS CONTROL ---
+    const Tweaks = ({ tweaks, setTweaks }) => {
+      const [minimized, setMinimized] = useState(true);
+      return (
+        <div className={`tweaks-panel ${minimized ? 'minimized' : ''}`}>
+          <div className="tweaks-header" onClick={() => setMinimized(!minimized)}>
+            <span className="tweaks-title">⚙ TWEAKS DEMO</span>
+            <button type="button" className="tweaks-btn">{minimized ? 'EXPAND' : 'CLOSE'}</button>
+          </div>
+        </div>
+      );
+    };
+
+    // --- MAIN APP ROOT ---
+    const App = () => {
+      const [cursorState, setCursorState] = useState({ text: null });
+      const [isExpanding, setIsExpanding] = useState(false);
+      const [tweaks, setTweaks] = useState({ accent: 'Yellow', motion: 'medium', glow: true, grid: false, particles: true });
+
+      const handleExploreClick = () => {
+        setIsExpanding(true);
+        setTimeout(() => {
+          document.getElementById('da-luz-a-energia')?.scrollIntoView({ behavior: 'smooth' });
+          setTimeout(() => setIsExpanding(false), 800);
+        }, 400);
+      };
+
+      return (
+        <div className="app-main-wrapper">
+          <div className="bg-noise" />
+          <Cursor cursorState={cursorState} />
+
+          <header className="site-header">
+            <a href="#hero" className="logo-brand">
+              <div className="logo-icon"><span style={{ fontSize: '0.8rem', color: '#0B0D0C', fontWeight: 'bold' }}>☀️</span></div>
+              <span className="logo-text">INTERSOLAR</span>
+            </a>
+            <div className="chapter-indicator">
+              <span>CHAPTER:</span><strong>CH 01 · O SOL</strong>
+              <a href="/" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--color-solar-black)', background: 'var(--accent-color)', padding: '0.3rem 0.7rem', borderRadius: '99px', textDecoration: 'none', marginLeft: '1rem', fontWeight: 'bold' }}>VERSÃO COMERCIAL</a>
+            </div>
+            <a href="https://wa.me/5594999999999" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '0.7rem 1.4rem', fontSize: '0.8rem' }}>
+              <span>CONTATO</span><span>→</span>
+            </a>
+          </header>
+
+          <main>
+            <Hero setCursorState={setCursorState} onExploreClick={handleExploreClick} isExpanding={isExpanding} tweaks={tweaks} />
+            <EnergyFlow setCursorState={setCursorState} />
+            <Problem />
+            <Difference setCursorState={setCursorState} />
+            <Services setCursorState={setCursorState} />
+            <System />
+            <Dashboard />
+            <BeforeAfter />
+            <Trust setCursorState={setCursorState} />
+            <Projects setCursorState={setCursorState} />
+            <Parauapebas />
+            <FAQ setCursorState={setCursorState} />
+            <FinalCTA setCursorState={setCursorState} />
+          </main>
+
+          <Footer />
+          <Tweaks tweaks={tweaks} setTweaks={setTweaks} />
+        </div>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
