@@ -115,11 +115,6 @@
     .custom-cursor.hovered { width: 48px; height: 48px; background-color: rgba(255, 196, 0, 0.2); border: 1px solid var(--accent-color); backdrop-filter: blur(4px); }
     .custom-cursor-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-offwhite); text-transform: uppercase; }
 
-    .tweaks-panel { position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 9000; background: rgba(21, 24, 23, 0.92); border: 1px solid var(--color-border-dark); backdrop-filter: blur(16px); border-radius: 16px; padding: 0.85rem 1.1rem; box-shadow: 0 20px 40px rgba(0,0,0,0.6); width: 220px; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-    .tweaks-panel.minimized { transform: translateY(calc(100% - 36px)); }
-    .tweaks-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; cursor: pointer; }
-    .tweaks-title { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; color: var(--accent-color); display: flex; align-items: center; gap: 0.5rem; }
-
     input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: rgba(8, 9, 8, 0.12); outline: none; }
     input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-color); border: 3px solid var(--color-dark-bg); cursor: pointer; box-shadow: 0 0 15px var(--accent-glow); }
 
@@ -147,8 +142,7 @@
       :root { --header-height: 64px; }
       .btn-primary, .btn-secondary { width: 100% !important; justify-content: center !important; }
       .custom-cursor { display: none !important; }
-      .tweaks-panel { bottom: 0.75rem; right: 0.75rem; width: 160px !important; }
-      .floating-whatsapp-btn { bottom: 0.75rem; left: 0.75rem; width: 52px; height: 52px; padding: 0; justify-content: center; border-radius: 50%; }
+      .floating-whatsapp-btn { bottom: 1.25rem; left: 1.25rem; width: 52px; height: 52px; padding: 0; justify-content: center; border-radius: 50%; }
       .desktop-only { display: none !important; }
       .mobile-only { display: flex !important; }
     }
@@ -581,23 +575,9 @@
       </footer>
     );
 
-    // --- TWEAKS CONTROL ---
-    const Tweaks = ({ tweaks, setTweaks }) => {
-      const [minimized, setMinimized] = useState(true);
-      return (
-        <div className={`tweaks-panel ${minimized ? 'minimized' : ''}`}>
-          <div className="tweaks-header" onClick={() => setMinimized(!minimized)}>
-            <span className="tweaks-title">⚙ TWEAKS DEMO</span>
-            <button type="button" className="tweaks-btn">{minimized ? 'EXPAND' : 'CLOSE'}</button>
-          </div>
-        </div>
-      );
-    };
-
     // --- APP ROOT ---
     const AppComercial = () => {
       const [cursorState, setCursorState] = useState({ text: null });
-      const [tweaks, setTweaks] = useState({ accent: 'Yellow', motion: 'medium', glow: true, grid: false, particles: true });
 
       const handleCalculateClick = () => {
         document.getElementById('simulador')?.scrollIntoView({ behavior: 'smooth' });
@@ -624,7 +604,6 @@
             <FinalCTAComercial onCalculateClick={handleCalculateClick} setCursorState={setCursorState} />
           </main>
           <FooterComercial />
-          <Tweaks tweaks={tweaks} setTweaks={setTweaks} />
         </div>
       );
     };

@@ -2,13 +2,6 @@ const { useState } = React;
 
 const AppComercial = () => {
   const [cursorState, setCursorState] = useState({ text: null });
-  const [tweaks, setTweaks] = useState({
-    accent: 'Yellow',
-    motion: 'medium',
-    glow: true,
-    grid: false,
-    particles: true
-  });
 
   const handleCalculateClick = () => {
     const simElem = document.getElementById('simulador');
@@ -78,9 +71,6 @@ const AppComercial = () => {
 
       {/* Commercial Footer */}
       <FooterComercial />
-
-      {/* Developer Interactive Tweaks Panel */}
-      <Tweaks tweaks={tweaks} setTweaks={setTweaks} />
     </div>
   );
 };

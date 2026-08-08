@@ -150,15 +150,6 @@
     .custom-cursor.hovered { width: 48px; height: 48px; background-color: rgba(255, 196, 0, 0.2); border: 1px solid var(--accent-color); backdrop-filter: blur(4px); }
     .custom-cursor-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-warm-white); text-transform: uppercase; }
 
-    .tweaks-panel { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9000; background: rgba(21, 24, 23, 0.92); border: 1px solid var(--color-border-dark); backdrop-filter: blur(16px); border-radius: 16px; padding: 1.25rem; box-shadow: 0 20px 40px rgba(0,0,0,0.6); width: 280px; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-    .tweaks-panel.minimized { transform: translateY(calc(100% - 44px)); }
-    .tweaks-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; cursor: pointer; }
-    .tweaks-title { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; color: var(--accent-color); display: flex; align-items: center; gap: 0.5rem; }
-    .tweaks-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-muted-grey); text-transform: uppercase; margin-bottom: 0.35rem; display: block; }
-    .tweaks-options { display: flex; gap: 0.35rem; flex-wrap: wrap; }
-    .tweaks-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--color-warm-white); font-family: var(--font-mono); font-size: 0.65rem; padding: 0.25rem 0.6rem; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; }
-    .tweaks-btn:hover, .tweaks-btn.active { background: var(--accent-color); color: var(--color-solar-black); border-color: var(--accent-color); }
-
     .glass-card { background: rgba(21, 24, 23, 0.6); border: 1px solid var(--color-border-dark); border-radius: 20px; padding: clamp(1.25rem, 3vw, 3rem); backdrop-filter: blur(10px); }
 
     .mobile-only { display: none; }
@@ -167,7 +158,6 @@
       :root { --header-height: 64px; }
       .btn-primary, .btn-secondary { width: 100% !important; justify-content: center !important; }
       .custom-cursor { display: none !important; }
-      .tweaks-panel { bottom: 0.75rem; right: 0.75rem; width: calc(100vw - 1.5rem); }
       .site-header { padding: 0 1rem; }
       .chapter-indicator { display: none !important; }
       .desktop-only { display: none !important; }
@@ -204,7 +194,7 @@
     };
 
     // --- SOLAR SYSTEM CANVAS ENGINE ---
-    const SolarSystem = ({ isExpanding, tweaks }) => {
+    const SolarSystem = ({ isExpanding }) => {
       const canvasRef = useRef(null);
 
       useEffect(() => {
@@ -231,7 +221,7 @@
         };
         window.addEventListener('mousemove', handleMouseMove);
 
-        const numParticles = tweaks?.particles === false ? 0 : (tweaks?.motion === 'low' ? 60 : tweaks?.motion === 'high' ? 220 : 130);
+        const numParticles = 130;
         const particles = [];
 
         for (let i = 0; i < numParticles; i++) {
@@ -243,7 +233,7 @@
             baseAngle: angle,
             baseDist: dist,
             size: Math.random() * 2.2 + 0.6,
-            speed: (Math.random() * 0.008 + 0.002) * (tweaks?.motion === 'low' ? 0.5 : tweaks?.motion === 'high' ? 1.8 : 1),
+            speed: Math.random() * 0.008 + 0.002,
             opacity: Math.random() * 0.7 + 0.3
           });
         }
@@ -284,20 +274,18 @@
           ctx.restore();
 
           // Glow
-          if (tweaks?.glow !== false) {
-            const glowGrad = ctx.createRadialGradient(
-              centerX + (mouse.x - centerX) * 0.08, centerY + (mouse.y - centerY) * 0.08, sunRadius * 0.2,
-              centerX, centerY, sunRadius * 2.8
-            );
-            glowGrad.addColorStop(0, '#FFDC64');
-            glowGrad.addColorStop(0.25, 'rgba(255, 196, 0, 0.45)');
-            glowGrad.addColorStop(0.65, 'rgba(255, 122, 0, 0.18)');
-            glowGrad.addColorStop(1, 'rgba(11, 13, 12, 0)');
-            ctx.fillStyle = glowGrad;
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, sunRadius * 2.8, 0, Math.PI * 2);
-            ctx.fill();
-          }
+          const glowGrad = ctx.createRadialGradient(
+            centerX + (mouse.x - centerX) * 0.08, centerY + (mouse.y - centerY) * 0.08, sunRadius * 0.2,
+            centerX, centerY, sunRadius * 2.8
+          );
+          glowGrad.addColorStop(0, '#FFDC64');
+          glowGrad.addColorStop(0.25, 'rgba(255, 196, 0, 0.45)');
+          glowGrad.addColorStop(0.65, 'rgba(255, 122, 0, 0.18)');
+          glowGrad.addColorStop(1, 'rgba(11, 13, 12, 0)');
+          ctx.fillStyle = glowGrad;
+          ctx.beginPath();
+          ctx.arc(centerX, centerY, sunRadius * 2.8, 0, Math.PI * 2);
+          ctx.fill();
 
           // Core
           const coreGrad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, sunRadius);
@@ -345,16 +333,16 @@
           window.removeEventListener('resize', handleResize);
           window.removeEventListener('mousemove', handleMouseMove);
         };
-      }, [isExpanding, tweaks]);
+      }, [isExpanding]);
 
       return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }} />;
     };
 
     // --- HERO ---
-    const Hero = ({ setCursorState, onExploreClick, isExpanding, tweaks }) => (
+    const Hero = ({ setCursorState, onExploreClick, isExpanding }) => (
       <section className="hero-section" id="hero">
         <div className="hero-canvas-container">
-          <SolarSystem isExpanding={isExpanding} tweaks={tweaks} />
+          <SolarSystem isExpanding={isExpanding} />
         </div>
         <div className="hero-content container">
           <div className="hero-badge-wrap">
@@ -405,7 +393,6 @@
     // --- ENERGY FLOW ---
     const EnergyFlow = ({ setCursorState }) => {
       const [activeStep, setActiveStep] = useState(1);
-      const canvasRef = useRef(null);
 
       const steps = [
         { id: 0, label: 'SOL', sub: 'RADIAÇÃO', verb: 'ORIGEM', desc: 'Emissão contínua de fótons de alta densidade energética.' },
@@ -714,11 +701,11 @@
     const FinalCTA = ({ setCursorState }) => (
       <section className="section section-dark" id="contato" style={{ textAlign: 'center', background: '#060707', padding: '6rem 0' }}>
         <div className="container">
-          <span className="mono-tag">CAPÍTULO 06 · O FUTURO</span>
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)', marginTop: '1.25rem' }}>O próximo passo começa com uma pergunta.</h2>
-          <h2 style={{ fontSize: 'clamp(2.2rem, 6vw, 5.5rem)', color: 'var(--accent-color)', margin: '0.5rem 0 2rem 0' }}>Quanto o seu imóvel pode gerar?</h2>
-          <a href="https://wa.me/5594999999999" target="_blank" rel="noopener noreferrer" className="btn-primary" onMouseEnter={() => setCursorState({ text: 'ORÇAMENTO' })} onMouseLeave={() => setCursorState({ text: null })}>
-            <span>SOLICITAR ORÇAMENTO</span><span>→</span>
+          <span className="mono-tag">DECISÃO PATRIMONIAL</span>
+          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)', marginTop: '1.25rem' }}>O sol já faz a parte dele.</h2>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 6vw, 5.5rem)', color: 'var(--accent-color)', margin: '0.5rem 0 2rem 0' }}>Agora é a sua vez.</h2>
+          <a href="https://wa.me/5594999999999" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: '1rem', padding: '1.2rem 2.25rem' }}>
+            <span>SOLICITAR ORÇAMENTO →</span>
           </a>
         </div>
       </section>
@@ -726,7 +713,7 @@
 
     // --- FOOTER ---
     const Footer = () => (
-      <footer style={{ background: 'var(--color-solar-black)', borderTop: '1px solid var(--color-border-dark)', padding: '3.5rem 0 2rem 0', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+      <footer style={{ background: '#040505', color: 'var(--color-warm-white)', borderTop: '1px solid var(--color-border-dark)', padding: '3.5rem 0 2rem 0', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
           <div>
             <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.35rem', color: 'var(--color-warm-white)' }}>INTERSOLAR</h3>
@@ -740,25 +727,11 @@
       </footer>
     );
 
-    // --- TWEAKS CONTROL ---
-    const Tweaks = ({ tweaks, setTweaks }) => {
-      const [minimized, setMinimized] = useState(true);
-      return (
-        <div className={`tweaks-panel ${minimized ? 'minimized' : ''}`}>
-          <div className="tweaks-header" onClick={() => setMinimized(!minimized)}>
-            <span className="tweaks-title">⚙ TWEAKS DEMO</span>
-            <button type="button" className="tweaks-btn">{minimized ? 'EXPAND' : 'CLOSE'}</button>
-          </div>
-        </div>
-      );
-    };
-
     // --- MAIN APP ROOT ---
     const App = () => {
       const [cursorState, setCursorState] = useState({ text: null });
       const [isExpanding, setIsExpanding] = useState(false);
       const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-      const [tweaks, setTweaks] = useState({ accent: 'Yellow', motion: 'medium', glow: true, grid: false, particles: true });
 
       const handleExploreClick = () => {
         setIsExpanding(true);
@@ -797,9 +770,9 @@
                 <a href="#da-luz-a-energia" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-warm-white)', textDecoration: 'none', borderBottom: '1px solid rgba(244, 242, 234, 0.1)', paddingBottom: '0.75rem' }}>O SOL</a>
                 <a href="#a-diferenca" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-warm-white)', textDecoration: 'none', borderBottom: '1px solid rgba(244, 242, 234, 0.1)', paddingBottom: '0.75rem' }}>ENGENHARIA</a>
                 <a href="#servicos" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-warm-white)', textDecoration: 'none', borderBottom: '1px solid rgba(244, 242, 234, 0.1)', paddingBottom: '0.75rem' }}>SERVIÇOS</a>
-                <a href="#projetos" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-warm-white)', textDecoration: 'none', borderBottom: '1px solid rgba(244, 242, 234, 0.1)', paddingBottom: '0.75rem' }}>PROJETOS</a>
-                <a href="#faq" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-warm-white)', textDecoration: 'none', borderBottom: '1px solid rgba(244, 242, 234, 0.1)', paddingBottom: '0.75rem' }}>FAQ</a>
-                <a href="/" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-color)', textDecoration: 'none' }}>🏠 VERSÃO COMERCIAL</a>
+                <a href="#projetos" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight 800, color: 'var(--color-warm-white)', textDecoration: 'none', borderBottom: '1px solid rgba(244, 242, 234, 0.1)', paddingBottom: '0.75rem' }}>PROJETOS</a>
+                <a href="#faq" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight 800, color: 'var(--color-warm-white)', textDecoration: 'none', borderBottom: '1px solid rgba(244, 242, 234, 0.1)', paddingBottom: '0.75rem' }}>FAQ</a>
+                <a href="/" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight 700, color: 'var(--accent-color)', textDecoration: 'none' }}>🏠 VERSÃO COMERCIAL</a>
                 <a href="https://wa.me/5594999999999" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ marginTop: '1.5rem', justifyContent: 'center' }}>
                   <span>SOLICITAR ORÇAMENTO →</span>
                 </a>
@@ -808,7 +781,7 @@
           )}
 
           <main>
-            <Hero setCursorState={setCursorState} onExploreClick={handleExploreClick} isExpanding={isExpanding} tweaks={tweaks} />
+            <Hero setCursorState={setCursorState} onExploreClick={handleExploreClick} isExpanding={isExpanding} />
             <EnergyFlow setCursorState={setCursorState} />
             <Problem />
             <Difference setCursorState={setCursorState} />
@@ -824,7 +797,6 @@
           </main>
 
           <Footer />
-          <Tweaks tweaks={tweaks} setTweaks={setTweaks} />
         </div>
       );
     };

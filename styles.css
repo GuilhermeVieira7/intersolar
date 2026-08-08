@@ -313,25 +313,6 @@ p {
   text-transform: uppercase;
 }
 
-.tweaks-panel {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 9000;
-  background: rgba(21, 24, 23, 0.92);
-  border: 1px solid var(--color-border-dark);
-  backdrop-filter: blur(16px);
-  border-radius: 16px;
-  padding: 1.25rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  width: 280px;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.tweaks-panel.minimized {
-  transform: translateY(calc(100% - 44px));
-}
-
 .glass-card {
   background: rgba(21, 24, 23, 0.6);
   border: 1px solid var(--color-border-dark);
@@ -353,12 +334,6 @@ p {
 
   .custom-cursor {
     display: none !important;
-  }
-
-  .tweaks-panel {
-    bottom: 0.75rem;
-    right: 0.75rem;
-    width: calc(100vw - 1.5rem);
   }
 
   .site-header {

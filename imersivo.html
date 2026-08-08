@@ -740,25 +740,11 @@
       </footer>
     );
 
-    // --- TWEAKS CONTROL ---
-    const Tweaks = ({ tweaks, setTweaks }) => {
-      const [minimized, setMinimized] = useState(true);
-      return (
-        <div className={`tweaks-panel ${minimized ? 'minimized' : ''}`}>
-          <div className="tweaks-header" onClick={() => setMinimized(!minimized)}>
-            <span className="tweaks-title">⚙ TWEAKS DEMO</span>
-            <button type="button" className="tweaks-btn">{minimized ? 'EXPAND' : 'CLOSE'}</button>
-          </div>
-        </div>
-      );
-    };
-
     // --- MAIN APP ROOT ---
     const App = () => {
       const [cursorState, setCursorState] = useState({ text: null });
       const [isExpanding, setIsExpanding] = useState(false);
       const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-      const [tweaks, setTweaks] = useState({ accent: 'Yellow', motion: 'medium', glow: true, grid: false, particles: true });
 
       const handleExploreClick = () => {
         setIsExpanding(true);
@@ -808,7 +794,7 @@
           )}
 
           <main>
-            <Hero setCursorState={setCursorState} onExploreClick={handleExploreClick} isExpanding={isExpanding} tweaks={tweaks} />
+            <Hero setCursorState={setCursorState} onExploreClick={handleExploreClick} isExpanding={isExpanding} />
             <EnergyFlow setCursorState={setCursorState} />
             <Problem />
             <Difference setCursorState={setCursorState} />
@@ -824,7 +810,6 @@
           </main>
 
           <Footer />
-          <Tweaks tweaks={tweaks} setTweaks={setTweaks} />
         </div>
       );
     };
