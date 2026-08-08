@@ -48,9 +48,9 @@
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'Geist Mono', monospace;
 
-      --gutter: clamp(1.25rem, 4vw, 4rem);
+      --gutter: clamp(1rem, 4vw, 4rem);
       --max-width: 1440px;
-      --header-height: 80px;
+      --header-height: 72px;
 
       --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -83,7 +83,7 @@
     .mono-tag::before { content: ''; display: inline-block; width: 6px; height: 6px; background-color: var(--color-tech-green); border-radius: 50%; }
 
     .btn-primary {
-      display: inline-flex; align-items: center; gap: 0.85rem; background-color: var(--accent-color); color: var(--color-dark-bg);
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.85rem; background-color: var(--accent-color); color: var(--color-dark-bg);
       font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; padding: 1.15rem 2.25rem;
       border-radius: 9999px; border: 1px solid var(--accent-color); cursor: pointer; text-decoration: none;
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
@@ -91,7 +91,7 @@
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px var(--accent-glow); background-color: #FFFFFF; }
 
     .btn-secondary {
-      display: inline-flex; align-items: center; gap: 0.75rem; background: transparent; color: var(--color-black-text);
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; background: transparent; color: var(--color-black-text);
       font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em; padding: 1.15rem 2rem;
       border-radius: 9999px; border: 1px solid var(--color-border-light); cursor: pointer; text-decoration: none;
       transition: border-color var(--transition-fast), color var(--transition-fast);
@@ -99,13 +99,13 @@
     .btn-secondary:hover { border-color: var(--color-tech-green); color: var(--color-tech-green); }
 
     .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
-    .section { position: relative; padding: clamp(4.5rem, 8vw, 8.5rem) 0; }
+    .section { position: relative; padding: clamp(3.5rem, 7vw, 7.5rem) 0; }
     .section-light-theme { background-color: var(--color-offwhite); color: var(--color-black-text); }
     .section-dark-theme { background-color: var(--color-dark-bg); color: var(--color-offwhite); }
     .section-dark-theme .mono-tag { color: var(--accent-color); }
     .section-dark-theme .mono-tag::before { background-color: var(--accent-color); }
 
-    .glass-card { background: rgba(21, 24, 23, 0.6); border: 1px solid var(--color-border-dark); border-radius: 20px; padding: clamp(1.5rem, 3vw, 3rem); backdrop-filter: blur(10px); }
+    .glass-card { background: rgba(21, 24, 23, 0.6); border: 1px solid var(--color-border-dark); border-radius: 20px; padding: clamp(1.25rem, 3vw, 3rem); backdrop-filter: blur(10px); }
 
     .custom-cursor {
       position: fixed; top: 0; left: 0; width: 12px; height: 12px; background-color: var(--accent-color); border-radius: 50%;
@@ -127,9 +127,15 @@
     input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: rgba(8, 9, 8, 0.12); outline: none; }
     input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-color); border: 3px solid var(--color-dark-bg); cursor: pointer; box-shadow: 0 0 15px var(--accent-glow); }
 
-    @media (max-width: 768px) {
+    .mobile-only { display: none; }
+
+    @media (max-width: 900px) {
+      :root { --header-height: 64px; }
+      .btn-primary, .btn-secondary { width: 100% !important; justify-content: center !important; }
       .custom-cursor { display: none !important; }
       .tweaks-panel { bottom: 0.75rem; right: 0.75rem; width: calc(100vw - 1.5rem); }
+      .desktop-only { display: none !important; }
+      .mobile-only { display: flex !important; }
     }
   </style>
 </head>
@@ -162,38 +168,64 @@
     };
 
     // --- NAV ---
-    const Nav = ({ setCursorState }) => (
-      <header style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: 'var(--header-height)', zIndex: 100, background: 'rgba(247, 246, 241, 0.9)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(8, 9, 8, 0.08)', display: 'flex', alignItems: 'center' }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <a href="#hero-comercial" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', color: 'var(--color-black-text)' }}>
-            <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: 'radial-gradient(circle at 35% 35%, var(--accent-color), var(--color-solar-orange))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>☀️</div>
-            <div>
-              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: '1.2rem', display: 'block' }}>INTERSOLAR</span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--color-tech-green)', fontWeight: 700 }}>PARAUAPEBAS + REGIÃO</span>
+    const Nav = ({ setCursorState }) => {
+      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+      return (
+        <header style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: 'var(--header-height)', zIndex: 1000, background: 'rgba(247, 246, 241, 0.95)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(8, 9, 8, 0.08)', display: 'flex', alignItems: 'center' }}>
+          <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+            <a href="#hero-comercial" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', color: 'var(--color-black-text)' }}>
+              <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: 'radial-gradient(circle at 35% 35%, var(--accent-color), var(--color-solar-orange))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>☀️</div>
+              <div>
+                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: '1.2rem', display: 'block' }}>INTERSOLAR</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--color-tech-green)', fontWeight: 700 }}>PARAUAPEBAS + REGIÃO</span>
+              </div>
+            </a>
+
+            <nav className="desktop-only" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+              <a href="#simulador" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-black-text)', textDecoration: 'none' }}>SIMULADOR</a>
+              <a href="#como-funciona" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-black-text)', textDecoration: 'none' }}>PROCESSO</a>
+              <a href="#servicos" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-black-text)', textDecoration: 'none' }}>SERVIÇOS</a>
+              <a href="#projetos" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-black-text)', textDecoration: 'none' }}>PROJETOS</a>
+              <a href="#faq" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-black-text)', textDecoration: 'none' }}>FAQ</a>
+              <a href="/imersivo" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', fontWeight: 700, color: 'var(--accent-color)', background: 'var(--color-dark-bg)', padding: '0.4rem 0.8rem', borderRadius: '99px', textDecoration: 'none' }}>✨ EXPERIÊNCIA IMERSIVA</a>
+            </nav>
+
+            <a href="https://wa.me/5594999999999" target="_blank" rel="noopener noreferrer" className="btn-primary desktop-only" style={{ padding: '0.65rem 1.4rem', fontSize: '0.8rem' }}>
+              <span>ORÇAMENTO</span><span>→</span>
+            </a>
+
+            <button type="button" className="mobile-only" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} style={{ background: 'var(--color-dark-bg)', color: 'var(--accent-color)', border: 'none', fontSize: '1.5rem', width: '42px', height: '42px', borderRadius: '50%', cursor: 'pointer', alignItems: 'center', justifyContent: 'center' }}>
+              {mobileMenuOpen ? '✕' : '☰'}
+            </button>
+          </div>
+
+          {mobileMenuOpen && (
+            <div style={{ position: 'fixed', top: 'var(--header-height)', left: 0, width: '100vw', height: 'calc(100vh - var(--header-height))', background: 'rgba(11, 13, 12, 0.98)', backdropFilter: 'blur(20px)', zIndex: 999, padding: '2.5rem 1.5rem', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <a href="#simulador" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-offwhite)', textDecoration: 'none', borderBottom: '1px solid rgba(247, 246, 241, 0.1)', paddingBottom: '0.75rem' }}>SIMULADOR</a>
+                <a href="#como-funciona" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-offwhite)', textDecoration: 'none', borderBottom: '1px solid rgba(247, 246, 241, 0.1)', paddingBottom: '0.75rem' }}>PROCESSO</a>
+                <a href="#servicos" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-offwhite)', textDecoration: 'none', borderBottom: '1px solid rgba(247, 246, 241, 0.1)', paddingBottom: '0.75rem' }}>SERVIÇOS</a>
+                <a href="#projetos" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-offwhite)', textDecoration: 'none', borderBottom: '1px solid rgba(247, 246, 241, 0.1)', paddingBottom: '0.75rem' }}>PROJETOS</a>
+                <a href="#faq" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-offwhite)', textDecoration: 'none', borderBottom: '1px solid rgba(247, 246, 241, 0.1)', paddingBottom: '0.75rem' }}>FAQ</a>
+                <a href="/imersivo" onClick={() => setMobileMenuOpen(false)} style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-color)', textDecoration: 'none' }}>✨ EXPERIÊNCIA IMERSIVA</a>
+                <a href="https://wa.me/5594999999999" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ marginTop: '1.5rem', justifyContent: 'center' }}>
+                  <span>SOLICITAR ORÇAMENTO →</span>
+                </a>
+              </div>
             </div>
-          </a>
-          <nav style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-            <a href="#simulador" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-black-text)', textDecoration: 'none' }}>SIMULADOR</a>
-            <a href="#como-funciona" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-black-text)', textDecoration: 'none' }}>PROCESSO</a>
-            <a href="#servicos" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-black-text)', textDecoration: 'none' }}>SERVIÇOS</a>
-            <a href="#projetos" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-black-text)', textDecoration: 'none' }}>PROJETOS</a>
-            <a href="#faq" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-black-text)', textDecoration: 'none' }}>FAQ</a>
-            <a href="/imersivo" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', fontWeight: 700, color: 'var(--accent-color)', background: 'var(--color-dark-bg)', padding: '0.4rem 0.8rem', borderRadius: '99px', textDecoration: 'none' }}>✨ EXPERIÊNCIA IMERSIVA</a>
-          </nav>
-          <a href="https://wa.me/5594999999999" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '0.65rem 1.4rem', fontSize: '0.8rem' }}>
-            <span>ORÇAMENTO</span><span>→</span>
-          </a>
-        </div>
-      </header>
-    );
+          )}
+        </header>
+      );
+    };
 
     // --- HERO COMERCIAL ---
     const HeroComercial = ({ setCursorState, onCalculateClick }) => (
       <section className="section section-light-theme" id="hero-comercial" style={{ paddingTop: 'calc(var(--header-height) + 3rem)', paddingBottom: 0 }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.15fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '5rem' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center', marginBottom: '4rem' }}>
           <div>
             <span className="mono-tag" style={{ marginBottom: '1.5rem' }}>ENERGIA SOLAR · PARAUAPEBAS + REGIÃO</span>
-            <h1 style={{ fontSize: 'clamp(3.2rem, 6vw, 6rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>Sua energia pode trabalhar a seu favor.</h1>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>Sua energia pode trabalhar a seu favor.</h1>
             <p style={{ fontSize: '1.25rem', color: 'var(--color-grey-muted)', lineHeight: 1.6, maxWidth: '580px', marginBottom: '2.75rem' }}>
               Projeto, instalação e homologação completa para transformar o potencial solar do seu imóvel em geração própria.
             </p>
@@ -206,7 +238,7 @@
               </a>
             </div>
           </div>
-          <div style={{ background: '#EFECE3', border: '1px solid var(--color-border-light)', borderRadius: '28px', padding: '3rem 2rem', minHeight: '380px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ background: '#EFECE3', border: '1px solid var(--color-border-light)', borderRadius: '28px', padding: '2rem 1.5rem', minHeight: '320px', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
             {['SOL ☀', 'PAINÉIS 🔲', 'INVERSOR ⚡', 'IMÓVEL 🏠'].map((n) => (
               <div key={n} style={{ textAlign: 'center', background: '#FFFFFF', padding: '1rem', borderRadius: '16px', border: '1px solid rgba(8,9,8,0.1)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 700 }}>
                 {n}
@@ -238,44 +270,44 @@
           <div className="container">
             <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 3.5rem auto' }}>
               <span className="mono-tag">FERRAMENTA INTERATIVA DE ESTIMATIVA</span>
-              <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 5rem)', marginTop: '1rem', marginBottom: '1rem' }}>Quanto seu imóvel pode gerar?</h2>
+              <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 5rem)', marginTop: '1rem', marginBottom: '1rem' }}>Quanto seu imóvel pode gerar?</h2>
               <p style={{ fontSize: '1.15rem', color: 'var(--color-grey-muted)' }}>Faça uma estimativa inicial e descubra o potencial de uma solução solar para a sua fatura.</p>
             </div>
 
-            <div style={{ background: 'var(--color-offwhite-card)', border: '1px solid var(--color-border-light)', borderRadius: '28px', padding: '2.5rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem' }}>
+            <div style={{ background: 'var(--color-offwhite-card)', border: '1px solid var(--color-border-light)', borderRadius: '28px', padding: '1.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
                 <div>
                   <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', fontWeight: 700, display: 'block', marginBottom: '1rem' }}>1. QUAL É O SEU GASTO MENSAL COM ENERGIA?</label>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#FFFFFF', border: '1px solid var(--color-border-light)', borderRadius: '16px', padding: '0.75rem 1.25rem', marginBottom: '1rem' }}>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--color-tech-green)' }}>R$</span>
-                    <input type="number" min="100" max="10000" step="50" value={monthlySpend} onChange={(e) => setMonthlySpend(Number(e.target.value))} style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 800, border: 'none', outline: 'none', background: 'transparent', width: '100%' }} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#FFFFFF', border: '1px solid var(--color-border-light)', borderRadius: '16px', padding: '0.75rem 1rem', marginBottom: '1rem' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.3rem', fontWeight: 700, color: 'var(--color-tech-green)' }}>R$</span>
+                    <input type="number" min="100" max="10000" step="50" value={monthlySpend} onChange={(e) => setMonthlySpend(Number(e.target.value))} style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 800, border: 'none', outline: 'none', background: 'transparent', width: '100%' }} />
                   </div>
                   <input type="range" min="100" max="10000" step="50" value={monthlySpend} onChange={(e) => setMonthlySpend(Number(e.target.value))} />
 
                   <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', fontWeight: 700, display: 'block', marginTop: '2rem', marginBottom: '1rem' }}>2. QUAL É O TIPO DO IMÓVEL?</label>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(90px, 1fr))', gap: '0.75rem' }}>
                     {['RESIDENCIAL', 'COMERCIAL', 'RURAL'].map((type) => (
-                      <button key={type} type="button" onClick={() => setPropertyType(type)} style={{ background: propertyType === type ? 'var(--color-dark-bg)' : '#FFFFFF', color: propertyType === type ? 'var(--color-offwhite)' : 'var(--color-black-text)', border: '1px solid var(--color-border-light)', borderRadius: '16px', padding: '1rem 0.5rem', cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', fontWeight: 700 }}>
+                      <button key={type} type="button" onClick={() => setPropertyType(type)} style={{ background: propertyType === type ? 'var(--color-dark-bg)' : '#FFFFFF', color: propertyType === type ? 'var(--color-offwhite)' : 'var(--color-black-text)', border: '1px solid var(--color-border-light)', borderRadius: '14px', padding: '0.85rem 0.4rem', cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: '0.65rem', fontWeight: 700 }}>
                         {type}
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <div style={{ background: 'var(--color-dark-bg)', color: 'var(--color-offwhite)', borderRadius: '20px', padding: '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div style={{ background: 'var(--color-dark-bg)', color: 'var(--color-offwhite)', borderRadius: '20px', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
                     <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--accent-color)' }}>● SIMULAÇÃO INSTANTÂNEA</span>
-                    <div style={{ margin: '1.5rem 0' }}>
+                    <div style={{ margin: '1.25rem 0' }}>
                       <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-grey-muted)' }}>ECONOMIA ESTIMADA</span>
-                      <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '2rem', color: '#00E676' }}>R$ {estimatedMonthlySavings.toLocaleString('pt-BR')} / mês</h3>
+                      <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.6rem', color: '#00E676' }}>R$ {estimatedMonthlySavings.toLocaleString('pt-BR')} / mês</h3>
                     </div>
-                    <div style={{ margin: '1.5rem 0' }}>
+                    <div style={{ margin: '1.25rem 0' }}>
                       <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-grey-muted)' }}>POTENCIAL ANUAL</span>
-                      <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '2rem', color: 'var(--accent-color)' }}>R$ {estimatedAnnualSavings.toLocaleString('pt-BR')} / ano</h3>
+                      <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.6rem', color: 'var(--accent-color)' }}>R$ {estimatedAnnualSavings.toLocaleString('pt-BR')} / ano</h3>
                     </div>
-                    <div style={{ margin: '1.5rem 0' }}>
+                    <div style={{ margin: '1.25rem 0' }}>
                       <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-grey-muted)' }}>SISTEMA ESTIMADO</span>
-                      <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '2rem', color: 'var(--color-offwhite)' }}>{estimatedKwp} kWp</h3>
+                      <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.6rem', color: 'var(--color-offwhite)' }}>{estimatedKwp} kWp</h3>
                     </div>
                   </div>
 
@@ -300,11 +332,11 @@
       <section className="section section-dark-theme" id="luz-ao-consumo">
         <div className="container">
           <span className="mono-tag">FLUXO ENERGÉTICO INTEGRADO</span>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '2.5rem' }}>Da luz ao consumo.</h2>
-          <div className="glass-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.5rem', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '2.5rem' }}>Da luz ao consumo.</h2>
+          <div className="glass-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1rem', textAlign: 'center' }}>
             {['☀ SOL', '🔲 PAINÉIS', '⚡ INVERSOR', '🏠 IMÓVEL', '📊 CONSUMO'].map((n) => (
-              <div key={n} style={{ border: '1px solid var(--color-border-dark)', padding: '1.5rem', borderRadius: '16px', background: 'rgba(11,13,12,0.8)' }}>
-                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.1rem' }}>{n}</span>
+              <div key={n} style={{ border: '1px solid var(--color-border-dark)', padding: '1.25rem 0.75rem', borderRadius: '16px', background: 'rgba(11,13,12,0.8)' }}>
+                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1rem' }}>{n}</span>
               </div>
             ))}
           </div>
@@ -317,10 +349,10 @@
       <section className="section section-light-theme" id="como-funciona">
         <div className="container">
           <span className="mono-tag">JORNADA DE IMPLANTAÇÃO</span>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3rem' }}>Do primeiro contato ao sistema funcionando.</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3rem' }}>Do primeiro contato ao sistema funcionando.</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem' }}>
             {['01 DIAGNÓSTICO', '02 ANÁLISE', '03 DIMENSIONAMENTO', '04 PROJETO', '05 INSTALAÇÃO', '06 HOMOLOGAÇÃO'].map((st) => (
-              <div key={st} style={{ background: '#FFFFFF', border: '1px solid var(--color-border-light)', padding: '1.5rem', borderRadius: '16px' }}>
+              <div key={st} style={{ background: '#FFFFFF', border: '1px solid var(--color-border-light)', padding: '1.25rem', borderRadius: '16px' }}>
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-tech-green)' }}>{st}</span>
               </div>
             ))}
@@ -334,11 +366,11 @@
       <section className="section section-dark-theme" id="servicos">
         <div className="container">
           <span className="mono-tag">ESCOPO TÉCNICO COMPLETO</span>
-          <h2 style={{ fontSize: 'clamp(2.8rem, 6vw, 6rem)', marginTop: '0.75rem', marginBottom: '3.5rem' }}>Tudo começa no projeto.</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 6vw, 6rem)', marginTop: '0.75rem', marginBottom: '3rem' }}>Tudo começa no projeto.</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {['01 — PROJETO FOTOVOLTAICO', '02 — DIMENSIONAMENTO', '03 — INSTALAÇÃO', '04 — HOMOLOGAÇÃO'].map((srv) => (
-              <div key={srv} style={{ borderTop: '1px solid var(--color-border-dark)', paddingTop: '2rem' }}>
-                <h3 style={{ fontSize: 'clamp(1.8rem, 4vw, 3.5rem)' }}>{srv}</h3>
+              <div key={srv} style={{ borderTop: '1px solid var(--color-border-dark)', paddingTop: '1.5rem' }}>
+                <h3 style={{ fontSize: 'clamp(1.5rem, 4vw, 3.5rem)' }}>{srv}</h3>
               </div>
             ))}
           </div>
@@ -352,14 +384,14 @@
         <div className="container">
           <span className="mono-tag">DADOS DEMONSTRATIVOS / TELEMETRIA</span>
           <div className="glass-card" style={{ marginTop: '1.5rem', background: '#0F1211' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--color-border-dark)', paddingBottom: '1rem', marginBottom: '1.5rem', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--color-border-dark)', paddingBottom: '1rem', marginBottom: '1.5rem', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', flexWrap: 'wrap', gap: '0.5rem' }}>
               <span>⚡ INTERSOLAR ENERGY MONITOR</span>
               <span style={{ color: '#00E676' }}>SYSTEM ● ONLINE</span>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', fontFamily: 'var(--font-mono)' }}>
-              <div><span>SOLAR GENERATION</span><h3 style={{ fontSize: '1.75rem', color: 'var(--accent-color)' }}>8.42 kW</h3></div>
-              <div><span>CONSUMPTION</span><h3 style={{ fontSize: '1.75rem', color: '#00E676' }}>6.17 kW</h3></div>
-              <div><span>TODAY</span><h3 style={{ fontSize: '1.75rem', color: 'var(--color-offwhite)' }}>24.8 kWh</h3></div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1.25rem', fontFamily: 'var(--font-mono)' }}>
+              <div><span>SOLAR GENERATION</span><h3 style={{ fontSize: '1.5rem', color: 'var(--accent-color)' }}>8.42 kW</h3></div>
+              <div><span>CONSUMPTION</span><h3 style={{ fontSize: '1.5rem', color: '#00E676' }}>6.17 kW</h3></div>
+              <div><span>TODAY</span><h3 style={{ fontSize: '1.5rem', color: 'var(--color-offwhite)' }}>24.8 kWh</h3></div>
             </div>
           </div>
         </div>
@@ -371,21 +403,21 @@
       <section className="section section-light-theme" id="beneficios">
         <div className="container">
           <span className="mono-tag">PILARES DE VALOR</span>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3.5rem' }}>Por que energia solar?</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
-            <div style={{ background: '#FFFFFF', border: '1px solid var(--color-border-light)', padding: '2.5rem', borderRadius: '24px' }}>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3rem' }}>Por que energia solar?</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ background: '#FFFFFF', border: '1px solid var(--color-border-light)', padding: '2rem', borderRadius: '24px' }}>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', color: 'var(--color-tech-green)', fontWeight: 700 }}>01</span>
-              <h3 style={{ fontSize: '2rem', margin: '0.75rem 0' }}>ECONOMIA</h3>
+              <h3 style={{ fontSize: '1.75rem', margin: '0.75rem 0' }}>ECONOMIA</h3>
               <p style={{ color: 'var(--color-grey-muted)' }}>Uma estratégia para reduzir a dependência da tarifa convencional da distribuidora.</p>
             </div>
-            <div style={{ background: '#FFFFFF', border: '1px solid var(--color-border-light)', padding: '2.5rem', borderRadius: '24px' }}>
+            <div style={{ background: '#FFFFFF', border: '1px solid var(--color-border-light)', padding: '2rem', borderRadius: '24px' }}>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', color: 'var(--color-tech-green)', fontWeight: 700 }}>02</span>
-              <h3 style={{ fontSize: '2rem', margin: '0.75rem 0' }}>GERAÇÃO PRÓPRIA</h3>
+              <h3 style={{ fontSize: '1.75rem', margin: '0.75rem 0' }}>GERAÇÃO PRÓPRIA</h3>
               <p style={{ color: 'var(--color-grey-muted)' }}>Produza energia limpa no próprio imóvel, transformando o espaço em um ativo gerador.</p>
             </div>
-            <div style={{ background: '#FFFFFF', border: '1px solid var(--color-border-light)', padding: '2.5rem', borderRadius: '24px' }}>
+            <div style={{ background: '#FFFFFF', border: '1px solid var(--color-border-light)', padding: '2rem', borderRadius: '24px' }}>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', color: 'var(--color-tech-green)', fontWeight: 700 }}>03</span>
-              <h3 style={{ fontSize: '2rem', margin: '0.75rem 0' }}>PLANEJAMENTO</h3>
+              <h3 style={{ fontSize: '1.75rem', margin: '0.75rem 0' }}>PLANEJAMENTO</h3>
               <p style={{ color: 'var(--color-grey-muted)' }}>Transforme a energia em uma decisão financeira previsível e de longo prazo.</p>
             </div>
           </div>
@@ -398,12 +430,12 @@
       <section className="section section-dark-theme" id="diferencial">
         <div className="container">
           <span className="mono-tag">VISÃO DE ENGENHARIA INTEGRADA</span>
-          <h2 style={{ fontSize: 'clamp(2.8rem, 6vw, 6rem)', marginTop: '1rem' }}>Não é só colocar painel no telhado.</h2>
-          <h3 style={{ fontSize: 'clamp(2rem, 4.5vw, 4.5rem)', color: 'var(--accent-color)', fontStyle: 'italic', fontWeight: 400, marginBottom: '3.5rem' }}>É fazer o sistema inteiro funcionar.</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem' }}>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 6vw, 6rem)', marginTop: '1rem' }}>Não é só colocar painel no telhado.</h2>
+          <h3 style={{ fontSize: 'clamp(1.8rem, 4.5vw, 4.5rem)', color: 'var(--accent-color)', fontStyle: 'italic', fontWeight: 400, marginBottom: '3rem' }}>É fazer o sistema inteiro funcionar.</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1rem' }}>
             {['PROJETO', 'ENGENHARIA', 'INSTALAÇÃO', 'HOMOLOGAÇÃO', 'ACOMPANHAMENTO'].map((item) => (
-              <div key={item} className="glass-card" style={{ padding: '1.5rem' }}>
-                <h4 style={{ fontSize: '1.2rem' }}>{item}</h4>
+              <div key={item} className="glass-card" style={{ padding: '1.25rem' }}>
+                <h4 style={{ fontSize: '1.1rem' }}>{item}</h4>
               </div>
             ))}
           </div>
@@ -416,8 +448,8 @@
       <section className="section section-dark-theme" id="parauapebas">
         <div className="container">
           <span className="mono-tag">PRESENÇA REGIONAL</span>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5rem)', marginTop: '1rem', marginBottom: '1.5rem' }}>Energia solar, perto de você.</h2>
-          <p style={{ fontSize: '1.2rem', color: 'rgba(247, 246, 241, 0.85)', maxWidth: '650px' }}>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 5.5vw, 5rem)', marginTop: '1rem', marginBottom: '1.5rem' }}>Energia solar, perto de você.</h2>
+          <p style={{ fontSize: '1.15rem', color: 'rgba(247, 246, 241, 0.85)', maxWidth: '650px' }}>
             A Intersolar atua em Parauapebas e região, aproximando tecnologia, projeto e atendimento da realidade de quem vive e empreende aqui.
           </p>
         </div>
@@ -429,13 +461,13 @@
       <section className="section section-light-theme" id="projetos">
         <div className="container">
           <span className="mono-tag">PORTFÓLIO E EXECUÇÃO</span>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3.5rem' }}>Projetos no campo.</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3rem' }}>Projetos no campo.</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
             {[1, 2, 3, 4].map((n) => (
-              <div key={n} style={{ background: 'var(--color-dark-bg)', color: 'var(--color-offwhite)', padding: '2rem', borderRadius: '20px', minHeight: '260px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div key={n} style={{ background: 'var(--color-dark-bg)', color: 'var(--color-offwhite)', padding: '1.5rem', borderRadius: '20px', minHeight: '240px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--accent-color)', border: '1px dashed var(--accent-color)', padding: '0.5rem', borderRadius: '6px' }}>[FOTO REAL DO PROJETO 0{n}]</span>
                 <div>
-                  <h4 style={{ fontSize: '1.25rem' }}>PROJETO FOTOVOLTAICO 0{n}</h4>
+                  <h4 style={{ fontSize: '1.15rem' }}>PROJETO FOTOVOLTAICO 0{n}</h4>
                   <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--color-grey-muted)' }}>PARAUAPEBAS / PA</span>
                 </div>
               </div>
@@ -450,13 +482,13 @@
       <section className="section section-light-theme" id="confianca">
         <div className="container">
           <span className="mono-tag">AUTORIDADE E REGIONALISMO</span>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3.5rem' }}>Presença Real em Parauapebas.</h2>
-          <div style={{ background: '#FFFFFF', border: '1px solid var(--color-border-light)', borderRadius: '24px', padding: '3rem', maxWidth: '800px' }}>
-            <h3 style={{ fontSize: '1.6rem' }}>@intersolarpa</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', margin: '2rem 0', textAlign: 'center' }}>
-              <div><span style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: 700, color: 'var(--color-tech-green)' }}>2.555</span><br /><span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem' }}>SEGUIDORES</span></div>
-              <div><span style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: 700, color: 'var(--color-tech-green)' }}>275</span><br /><span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem' }}>PUBLICAÇÕES</span></div>
-              <div><span style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: 700, color: 'var(--color-tech-green)' }}>100%</span><br /><span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem' }}>REGIONAL</span></div>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3rem' }}>Presença Real em Parauapebas.</h2>
+          <div style={{ background: '#FFFFFF', border: '1px solid var(--color-border-light)', borderRadius: '24px', padding: '2rem 1.5rem', maxWidth: '800px' }}>
+            <h3 style={{ fontSize: '1.5rem' }}>@intersolarpa</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '1.25rem', margin: '1.75rem 0', textAlign: 'center' }}>
+              <div><span style={{ fontFamily: 'var(--font-mono)', fontSize: '2rem', fontWeight: 700, color: 'var(--color-tech-green)' }}>2.555</span><br /><span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem' }}>SEGUIDORES</span></div>
+              <div><span style={{ fontFamily: 'var(--font-mono)', fontSize: '2rem', fontWeight: 700, color: 'var(--color-tech-green)' }}>275</span><br /><span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem' }}>PUBLICAÇÕES</span></div>
+              <div><span style={{ fontFamily: 'var(--font-mono)', fontSize: '2rem', fontWeight: 700, color: 'var(--color-tech-green)' }}>100%</span><br /><span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem' }}>REGIONAL</span></div>
             </div>
           </div>
         </div>
@@ -468,10 +500,10 @@
       <section className="section section-dark-theme" id="faq">
         <div className="container">
           <span className="mono-tag">RESPOSTAS TÉCNICAS E DIRETA</span>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3.5rem' }}>Perguntas Frequentes.</h2>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', marginBottom: '3rem' }}>Perguntas Frequentes.</h2>
           <div className="glass-card" style={{ maxWidth: '800px' }}>
-            <h3 style={{ fontSize: '1.5rem' }}>Como começo um projeto?</h3>
-            <p style={{ fontSize: '1.1rem', marginTop: '1rem', lineHeight: 1.6, color: 'rgba(247,246,241,0.85)' }}>
+            <h3 style={{ fontSize: '1.35rem' }}>Como começo um projeto?</h3>
+            <p style={{ fontSize: '1.05rem', marginTop: '0.75rem', lineHeight: 1.6, color: 'rgba(247,246,241,0.85)' }}>
               Basta enviar uma foto da sua conta recente de energia no WhatsApp. Nossa equipe elabora uma simulação técnica gratuita para o seu imóvel.
             </p>
           </div>
@@ -481,17 +513,17 @@
 
     // --- FINAL CTA ---
     const FinalCTAComercial = ({ onCalculateClick }) => (
-      <section className="section section-dark-theme" id="contato" style={{ textAlign: 'center', background: '#080908', padding: '8rem 0' }}>
+      <section className="section section-dark-theme" id="contato" style={{ textAlign: 'center', background: '#080908', padding: '6rem 0' }}>
         <div className="container">
           <span className="mono-tag">DECISÃO PATRIMONIAL</span>
-          <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)', marginTop: '1.5rem' }}>Seu imóvel já recebe o sol.</h2>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', color: 'var(--accent-color)', margin: '0.5rem 0 2.5rem 0' }}>Agora descubra o que ele pode gerar.</h2>
-          <button type="button" className="btn-primary" onClick={onCalculateClick} style={{ fontSize: '1.1rem', padding: '1.35rem 2.75rem' }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)', marginTop: '1.25rem' }}>Seu imóvel já recebe o sol.</h2>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 6vw, 5.5rem)', color: 'var(--accent-color)', margin: '0.5rem 0 2rem 0' }}>Agora descubra o que ele pode gerar.</h2>
+          <button type="button" className="btn-primary" onClick={onCalculateClick} style={{ fontSize: '1rem', padding: '1.2rem 2.25rem' }}>
             <span>CALCULAR MEU POTENCIAL →</span>
           </button>
-          <div style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid var(--color-border-dark)' }}>
-            <p style={{ fontSize: '1.5rem', fontStyle: 'italic', color: 'rgba(247, 246, 241, 0.7)' }}>"O sol já está fazendo a parte dele."</p>
-            <p style={{ fontSize: '2rem', fontWeight: 800, margin: '0.5rem 0 1.5rem 0' }}>"Agora é a sua vez."</p>
+          <div style={{ marginTop: '3.5rem', paddingTop: '2.5rem', borderTop: '1px solid var(--color-border-dark)' }}>
+            <p style={{ fontSize: '1.3rem', fontStyle: 'italic', color: 'rgba(247, 246, 241, 0.7)' }}>"O sol já está fazendo a parte dele."</p>
+            <p style={{ fontSize: '1.75rem', fontWeight: 800, margin: '0.5rem 0 1.25rem 0' }}>"Agora é a sua vez."</p>
             <a href="https://wa.me/5594999999999" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ background: '#FFFFFF', color: 'var(--color-dark-bg)', borderColor: '#FFFFFF' }}>
               <span>SOLICITAR ORÇAMENTO →</span>
             </a>
@@ -502,10 +534,10 @@
 
     // --- FOOTER ---
     const FooterComercial = () => (
-      <footer style={{ background: '#060707', color: 'var(--color-offwhite)', borderTop: '1px solid var(--color-border-dark)', padding: '4rem 0 2rem 0', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
+      <footer style={{ background: '#060707', color: 'var(--color-offwhite)', borderTop: '1px solid var(--color-border-dark)', padding: '3.5rem 0 2rem 0', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
           <div>
-            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem' }}>INTERSOLAR</h3>
+            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.35rem' }}>INTERSOLAR</h3>
             <span style={{ color: 'var(--accent-color)' }}>ENERGIA SOLAR · PARAUAPEBAS + REGIÃO</span>
           </div>
           <div>
