@@ -9,10 +9,10 @@ const Projects = ({ setCursorState }) => {
   return (
     <section className="section section-dark" id="projetos">
       <div className="container">
-        <div className="section-header-wrap">
+        <div className="projects-header-wrap">
           <span className="mono-tag eyebrow-line">PROJETOS</span>
-          <h2 className="section-title">Projetos em Parauapebas e região.</h2>
-          <p className="section-desc">Espaço reservado para fotos reais dos projetos executados pela InterSolar.</p>
+          <h2 className="projects-title">Projetos em Parauapebas e região.</h2>
+          <p className="projects-desc">Espaço reservado para fotos reais dos projetos executados pela InterSolar.</p>
         </div>
 
         <div className="projects-grid">
@@ -33,16 +33,16 @@ const Projects = ({ setCursorState }) => {
       </div>
 
       <style>{`
-        .section-header-wrap { margin-bottom: 3rem; max-width: 640px; }
+        .projects-header-wrap { margin-bottom: 3rem; max-width: 640px; }
 
-        .section-title {
+        .projects-title {
           font-size: clamp(2.2rem, 5vw, 3.6rem);
           margin-top: 0.9rem;
           margin-bottom: 0.75rem;
           color: var(--color-offwhite);
         }
 
-        .section-desc { font-size: 1.05rem; color: var(--color-muted-onDark); }
+        .projects-desc { font-size: 1.05rem; color: var(--color-muted-onDark); }
 
         .projects-grid {
           display: grid;

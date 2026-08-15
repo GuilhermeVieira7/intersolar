@@ -46,62 +46,69 @@ const Hero = ({ setCursorState }) => {
         <div className="hero-visual" aria-hidden="true">
           <svg viewBox="0 0 520 480" className="hero-illustration">
             <defs>
-              <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#FFD93D" stopOpacity="0.9" />
-                <stop offset="55%" stopColor="#FFC900" stopOpacity="0.28" />
-                <stop offset="100%" stopColor="#FFC900" stopOpacity="0" />
-              </radialGradient>
+              <linearGradient id="wallShade" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#E7E3D4" />
+                <stop offset="100%" stopColor="#D8D3C1" />
+              </linearGradient>
+              <linearGradient id="roofGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#0F4A31" />
+                <stop offset="100%" stopColor="#0B3D28" />
+              </linearGradient>
               <linearGradient id="panelGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#0B3D28" />
+                <stop offset="0%" stopColor="#123C2A" />
                 <stop offset="100%" stopColor="#082E20" />
               </linearGradient>
             </defs>
 
-            <circle cx="390" cy="110" r="150" fill="url(#sunGlow)" />
-            <circle cx="390" cy="110" r="46" fill="#FFC900" />
-            {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
-              <line
-                key={deg}
-                x1={390 + Math.cos((deg * Math.PI) / 180) * 62}
-                y1={110 + Math.sin((deg * Math.PI) / 180) * 62}
-                x2={390 + Math.cos((deg * Math.PI) / 180) * 82}
-                y2={110 + Math.sin((deg * Math.PI) / 180) * 82}
-                stroke="#FFD93D"
-                strokeWidth="4"
-                strokeLinecap="round"
-              />
+            {/* Sombra de solo */}
+            <ellipse cx="283.6" cy="345" rx="180" ry="26" fill="#061F15" opacity="0.35" />
+
+            {/* Volume da residência — fachadas isométricas */}
+            <polygon points="130.4,324.8 307.1,426.8 307.1,338.4 130.4,236.4" fill="url(#wallShade)" />
+            <polygon points="436.7,352.0 307.1,426.8 307.1,338.4 436.7,263.6" fill="#C7C2AE" />
+
+            {/* Esquadrias */}
+            <polygon points="151.1,316.3 186.4,336.7 186.4,299.3 151.1,278.9" fill="#17633C" opacity="0.55" stroke="#F7F5EE" strokeWidth="1.5" />
+            <polygon points="207.0,348.6 265.9,382.6 265.9,345.2 207.0,311.2" fill="#17633C" opacity="0.55" stroke="#F7F5EE" strokeWidth="1.5" />
+            <polygon points="274.7,408.1 295.3,420.0 295.3,365.6 274.7,353.7" fill="#0B3D28" />
+            <polygon points="419.0,341.8 377.8,365.6 377.8,328.2 419.0,304.4" fill="#17633C" opacity="0.45" stroke="#B7B29E" strokeWidth="1.5" />
+            <polygon points="360.1,375.8 321.8,397.9 321.8,360.5 360.1,338.4" fill="#17633C" opacity="0.45" stroke="#B7B29E" strokeWidth="1.5" />
+
+            {/* Laje / platibanda do telhado */}
+            <polygon points="109.8,236.4 307.1,350.3 307.1,339.4 109.8,225.5" fill="#082E20" />
+            <polygon points="457.3,263.6 307.1,350.3 307.1,339.4 457.3,252.7" fill="#0A331F" />
+            <polygon points="260.0,138.8 457.3,252.7 307.1,339.4 109.8,225.5" fill="url(#roofGrad)" />
+
+            {/* Detalhe amarelo discreto — friso do telhado */}
+            <polyline points="109.8,225.5 260.0,138.8 457.3,252.7" fill="none" stroke="#FFC900" strokeWidth="1.5" opacity="0.7" />
+
+            {/* Painéis fotovoltaicos integrados à cobertura */}
+            {[
+              '260.0,169.1 285.9,184.0 256.1,201.3 230.2,186.3',
+              '289.4,186.1 315.4,201.0 285.5,218.3 259.6,203.3',
+              '318.9,203.1 344.8,218.0 315.0,235.3 289.1,220.3',
+              '348.3,220.1 374.2,235.0 344.4,252.3 318.5,237.3',
+              '377.8,237.1 403.7,252.0 373.9,269.3 347.9,254.3',
+              '226.6,188.3 252.5,203.3 222.7,220.5 196.8,205.6',
+              '256.1,205.3 282.0,220.3 252.1,237.5 226.2,222.6',
+              '285.5,222.3 311.4,237.3 281.6,254.5 255.7,239.6',
+              '315.0,239.3 340.9,254.3 311.0,271.5 285.1,256.6',
+              '344.4,256.3 370.3,271.3 340.5,288.5 314.6,273.6',
+              '193.3,207.6 219.2,222.6 189.3,239.8 163.4,224.8',
+              '222.7,224.6 248.6,239.6 218.8,256.8 192.9,241.8',
+              '252.1,241.6 278.1,256.6 248.2,273.8 222.3,258.8',
+              '281.6,258.6 307.5,273.6 277.7,290.8 251.8,275.8',
+              '311.0,275.6 336.9,290.6 307.1,307.8 281.2,292.8',
+            ].map((pts) => (
+              <polygon key={pts} points={pts} fill="url(#panelGrad)" stroke="#FFC900" strokeWidth="0.8" strokeOpacity="0.85" />
             ))}
 
-            {/* Telhado */}
-            <path d="M40 330 L260 210 L480 330 L480 340 L40 340 Z" fill="#0B3D28" />
-            <path d="M40 330 L260 210 L480 330" fill="none" stroke="#17633C" strokeWidth="3" />
-
-            {/* Painéis solares sobre o telhado */}
-            <g transform="translate(120 246) rotate(-15)">
-              {[0, 1, 2].map((row) => (
-                <g key={row} transform={`translate(0 ${row * 34})`}>
-                  {[0, 1, 2, 3].map((col) => (
-                    <rect
-                      key={col}
-                      x={col * 46}
-                      y="0"
-                      width="42"
-                      height="30"
-                      rx="2"
-                      fill="url(#panelGrad)"
-                      stroke="#FFC900"
-                      strokeWidth="1.2"
-                    />
-                  ))}
-                </g>
-              ))}
+            {/* Aceno solar discreto, sem sol gigante */}
+            <g stroke="#FFC900" strokeWidth="2.5" strokeLinecap="round" opacity="0.8">
+              <line x1="452" y1="52" x2="452" y2="66" />
+              <line x1="430" y1="66" x2="440" y2="74" />
+              <line x1="474" y1="66" x2="464" y2="74" />
             </g>
-
-            {/* Base do imóvel */}
-            <rect x="40" y="340" width="440" height="110" fill="#F7F5EE" stroke="#0B3D28" strokeWidth="2" />
-            <rect x="230" y="380" width="70" height="70" fill="#0B3D28" />
-            <rect x="90" y="370" width="60" height="50" fill="#FFFFFF" stroke="#0B3D28" strokeWidth="2" />
-            <rect x="370" y="370" width="60" height="50" fill="#FFFFFF" stroke="#0B3D28" strokeWidth="2" />
           </svg>
         </div>
       </div>

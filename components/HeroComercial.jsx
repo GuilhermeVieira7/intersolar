@@ -46,58 +46,73 @@ const HeroComercial = ({ setCursorState, onCalculateClick }) => {
         <div className="hero-visual" aria-hidden="true">
           <svg viewBox="0 0 520 480" className="hero-illustration">
             <defs>
-              <radialGradient id="sunGlowCom" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#FFD93D" stopOpacity="0.9" />
-                <stop offset="55%" stopColor="#FFC900" stopOpacity="0.28" />
-                <stop offset="100%" stopColor="#FFC900" stopOpacity="0" />
-              </radialGradient>
+              <linearGradient id="wallShadeCom" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#E7E3D4" />
+                <stop offset="100%" stopColor="#D8D3C1" />
+              </linearGradient>
+              <linearGradient id="roofGradCom" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#0F4A31" />
+                <stop offset="100%" stopColor="#0B3D28" />
+              </linearGradient>
               <linearGradient id="panelGradCom" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#0B3D28" />
+                <stop offset="0%" stopColor="#123C2A" />
                 <stop offset="100%" stopColor="#082E20" />
               </linearGradient>
             </defs>
 
-            <circle cx="400" cy="95" r="140" fill="url(#sunGlowCom)" />
-            <circle cx="400" cy="95" r="42" fill="#FFC900" />
-            {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
-              <line
-                key={deg}
-                x1={400 + Math.cos((deg * Math.PI) / 180) * 56}
-                y1={95 + Math.sin((deg * Math.PI) / 180) * 56}
-                x2={400 + Math.cos((deg * Math.PI) / 180) * 74}
-                y2={95 + Math.sin((deg * Math.PI) / 180) * 74}
-                stroke="#FFD93D"
-                strokeWidth="4"
-                strokeLinecap="round"
-              />
+            {/* Sombra de solo */}
+            <ellipse cx="310.7" cy="355" rx="205" ry="24" fill="#061F15" opacity="0.35" />
+
+            {/* Volume do galpão / edifício comercial — fachadas isométricas */}
+            <polygon points="140.5,319.0 361.3,446.5 361.3,389.5 140.5,262.0" fill="url(#wallShadeCom)" />
+            <polygon points="480.8,377.5 361.3,446.5 361.3,389.5 480.8,320.5" fill="#C7C2AE" />
+
+            {/* Esquadrias e acesso */}
+            <polygon points="156.1,317.5 208.0,347.5 208.0,317.5 156.1,287.5" fill="#17633C" opacity="0.5" stroke="#F7F5EE" strokeWidth="1.5" />
+            <polygon points="221.0,355.0 273.0,385.0 273.0,355.0 221.0,325.0" fill="#17633C" opacity="0.5" stroke="#F7F5EE" strokeWidth="1.5" />
+            <polygon points="286.0,392.5 337.9,422.5 337.9,392.5 286.0,362.5" fill="#17633C" opacity="0.5" stroke="#F7F5EE" strokeWidth="1.5" />
+            <polygon points="345.7,437.5 358.7,445.0 358.7,406.0 345.7,398.5" fill="#0B3D28" />
+
+            {/* Laje / platibanda do telhado */}
+            <polygon points="124.9,262.0 361.3,398.5 361.3,391.3 124.9,254.8" fill="#082E20" />
+            <polygon points="496.4,320.5 361.3,398.5 361.3,391.3 496.4,313.3" fill="#0A331F" />
+            <polygon points="260.0,176.8 496.4,313.3 361.3,391.3 124.9,254.8" fill="url(#roofGradCom)" />
+
+            {/* Detalhe amarelo discreto — friso do telhado */}
+            <polyline points="124.9,254.8 260.0,176.8 496.4,313.3" fill="none" stroke="#FFC900" strokeWidth="1.5" opacity="0.7" />
+
+            {/* Array de painéis fotovoltaicos integrado à laje */}
+            {[
+              '260.0,203.5 284.3,217.6 257.2,233.3 232.8,219.2',
+              '287.5,219.4 311.8,233.4 284.6,249.1 260.3,235.1',
+              '314.9,235.2 339.3,249.3 312.1,265.0 287.7,250.9',
+              '342.4,251.1 366.7,265.1 339.6,280.8 315.2,266.8',
+              '369.9,266.9 394.2,281.0 367.0,296.7 342.7,282.6',
+              '397.3,282.8 421.7,296.8 394.5,312.5 370.1,298.5',
+              '424.8,298.6 449.1,312.7 421.9,328.4 397.6,314.3',
+              '229.7,221.0 254.0,235.1 226.8,250.8 202.5,236.7',
+              '257.2,236.9 281.5,250.9 254.3,266.6 230.0,252.6',
+              '284.6,252.7 309.0,266.8 281.8,282.5 257.4,268.4',
+              '312.1,268.6 336.4,282.6 309.2,298.3 284.9,284.3',
+              '339.6,284.4 363.9,298.5 336.7,314.2 312.4,300.1',
+              '367.0,300.3 391.4,314.3 364.2,330.0 339.8,316.0',
+              '394.5,316.1 418.8,330.2 391.6,345.9 367.3,331.8',
+              '199.4,238.5 223.7,252.6 196.5,268.3 172.2,254.2',
+              '226.8,254.4 251.2,268.4 224.0,284.1 199.7,270.1',
+              '254.3,270.2 278.7,284.3 251.5,300.0 227.1,285.9',
+              '281.8,286.1 306.1,300.1 278.9,315.8 254.6,301.8',
+              '309.2,301.9 333.6,316.0 306.4,331.7 282.0,317.6',
+              '336.7,317.8 361.1,331.8 333.9,347.5 309.5,333.5',
+              '364.2,333.6 388.5,347.7 361.3,363.4 337.0,349.3',
+            ].map((pts) => (
+              <polygon key={pts} points={pts} fill="url(#panelGradCom)" stroke="#FFC900" strokeWidth="0.8" strokeOpacity="0.85" />
             ))}
 
-            {/* Cobertura comercial de laje plana */}
-            <rect x="30" y="260" width="460" height="16" fill="#0B3D28" />
-            <rect x="30" y="276" width="460" height="180" fill="#F7F5EE" stroke="#0B3D28" strokeWidth="2" />
-            {[70, 150, 230, 310, 390].map((x) => (
-              <rect key={x} x={x} y="320" width="42" height="70" fill="#FFFFFF" stroke="#0B3D28" strokeWidth="2" />
-            ))}
-
-            {/* Array de painéis solares na laje */}
-            <g transform="translate(65 190)">
-              {[0, 1].map((row) => (
-                <g key={row} transform={`translate(0 ${row * 32})`}>
-                  {[0, 1, 2, 3, 4, 5, 6].map((col) => (
-                    <rect
-                      key={col}
-                      x={col * 56}
-                      y="0"
-                      width="50"
-                      height="26"
-                      rx="2"
-                      fill="url(#panelGradCom)"
-                      stroke="#FFC900"
-                      strokeWidth="1.2"
-                    />
-                  ))}
-                </g>
-              ))}
+            {/* Aceno solar discreto, sem sol gigante */}
+            <g stroke="#FFC900" strokeWidth="2.5" strokeLinecap="round" opacity="0.8">
+              <line x1="452" y1="46" x2="452" y2="60" />
+              <line x1="430" y1="60" x2="440" y2="68" />
+              <line x1="474" y1="60" x2="464" y2="68" />
             </g>
           </svg>
         </div>

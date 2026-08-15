@@ -37,10 +37,10 @@ const EnergyFlow = ({ setCursorState }) => {
   return (
     <section className="section section-light" id="como-funciona">
       <div className="container">
-        <div className="section-header-wrap">
+        <div className="flow-header-wrap">
           <span className="mono-tag eyebrow-line">COMO FUNCIONA</span>
-          <h2 className="section-title">Do sol ao seu imóvel.</h2>
-          <p className="section-desc">Quatro etapas simples transformam luz solar em energia pronta para uso.</p>
+          <h2 className="flow-title">Do sol ao seu imóvel.</h2>
+          <p className="flow-desc">Quatro etapas simples transformam luz solar em energia pronta para uso.</p>
         </div>
 
         <div className="flow-track">
@@ -75,16 +75,16 @@ const EnergyFlow = ({ setCursorState }) => {
       </div>
 
       <style>{`
-        .section-header-wrap { margin-bottom: 3.5rem; max-width: 640px; }
+        .flow-header-wrap { margin-bottom: 3.5rem; max-width: 640px; }
 
-        .section-title {
+        .flow-title {
           font-size: clamp(2.2rem, 5vw, 3.6rem);
           margin-top: 0.9rem;
           margin-bottom: 0.9rem;
           color: var(--color-text);
         }
 
-        .section-desc { font-size: 1.1rem; color: var(--color-muted); }
+        .flow-desc { font-size: 1.1rem; color: var(--color-muted); }
 
         .flow-track { position: relative; }
 

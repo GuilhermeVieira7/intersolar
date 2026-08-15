@@ -23,9 +23,9 @@ const FAQ = ({ setCursorState }) => {
   return (
     <section className="section section-white" id="faq">
       <div className="container">
-        <div className="section-header-wrap">
+        <div className="faq-header-wrap">
           <span className="mono-tag eyebrow-line">PERGUNTAS FREQUENTES</span>
-          <h2 className="section-title">Perguntas frequentes.</h2>
+          <h2 className="faq-title">Perguntas frequentes.</h2>
         </div>
 
         <div className="faq-list">
@@ -69,9 +69,9 @@ const FAQ = ({ setCursorState }) => {
       </div>
 
       <style>{`
-        .section-header-wrap { margin-bottom: 2.75rem; max-width: 640px; }
+        .faq-header-wrap { margin-bottom: 2.75rem; max-width: 640px; }
 
-        .section-title {
+        .faq-title {
           font-size: clamp(2.2rem, 5vw, 3.6rem);
           margin-top: 0.9rem;
           color: var(--color-text);
