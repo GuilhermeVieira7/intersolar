@@ -1,350 +1,179 @@
-const { useState, useEffect, useRef } = React;
+const { useState } = React;
+
+const FLOW_STEPS = [
+  {
+    num: '01',
+    label: 'SOL',
+    icon: 'Sun',
+    title: 'Energia que chega todos os dias',
+    desc: 'A radiação solar é captada pelos módulos instalados no imóvel.',
+  },
+  {
+    num: '02',
+    label: 'PAINÉIS SOLARES',
+    icon: 'SolarPanel',
+    title: 'A luz vira eletricidade',
+    desc: 'Os painéis fotovoltaicos transformam a luz solar em energia elétrica.',
+  },
+  {
+    num: '03',
+    label: 'INVERSOR',
+    icon: 'Zap',
+    title: 'Energia pronta para uso',
+    desc: 'O inversor converte a energia gerada para utilização no imóvel.',
+  },
+  {
+    num: '04',
+    label: 'IMÓVEL',
+    icon: 'House',
+    title: 'Sua energia trabalhando por você',
+    desc: 'A energia gerada passa a alimentar os equipamentos do imóvel.',
+  },
+];
 
 const EnergyFlow = ({ setCursorState }) => {
-  const [activeStep, setActiveStep] = useState(1); // 0: SOL, 1: PAINÉIS, 2: INVERSOR, 3: IMÓVEL, 4: CONSUMO
-  const canvasRef = useRef(null);
-
-  const steps = [
-    { id: 0, label: 'SOL', sub: 'RADIAÇÃO', verb: 'ORIGEM', desc: 'Emissão contínua de fótons de alta densidade energética.' },
-    { id: 1, label: 'PAINÉIS', sub: 'CAPTAÇÃO', verb: 'CAPTAÇÃO', desc: 'Transformação de fótons em corrente contínua (CC) através de células fotovoltaicas.' },
-    { id: 2, label: 'INVERSOR', sub: 'CONVERSÃO', verb: 'CONVERSÃO', desc: 'Conversão inteligente de corrente contínua em corrente alternada (CA) trifásica/monofásica.' },
-    { id: 3, label: 'IMÓVEL', sub: 'UTILIZAÇÃO', verb: 'ENERGIA', desc: 'Abastecimento imediato da infraestrutura elétrica residencial ou comercial.' },
-    { id: 4, label: 'CONSUMO', sub: 'EFICIÊNCIA', verb: 'SEU IMÓVEL', desc: 'Autonomia real com injeção do excedente na rede da concessionária local.' }
-  ];
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let animationFrameId;
-
-    let w = (canvas.width = canvas.parentElement.clientWidth);
-    let h = (canvas.height = canvas.parentElement.clientHeight);
-
-    const handleResize = () => {
-      if (!canvas.parentElement) return;
-      w = canvas.width = canvas.parentElement.clientWidth;
-      h = canvas.height = canvas.parentElement.clientHeight;
-    };
-    window.addEventListener('resize', handleResize);
-
-    // Particle flow stream
-    const flowParticles = Array.from({ length: 45 }, () => ({
-      progress: Math.random(),
-      speed: 0.003 + Math.random() * 0.004,
-      size: Math.random() * 2.5 + 1.2,
-      offsetY: (Math.random() - 0.5) * 12
-    }));
-
-    const render = () => {
-      ctx.clearRect(0, 0, w, h);
-
-      const margin = 80;
-      const nodeY = h / 2;
-      const stepWidth = (w - margin * 2) / (steps.length - 1);
-
-      // Draw horizontal baseline connection path
-      ctx.beginPath();
-      ctx.moveTo(margin, nodeY);
-      ctx.lineTo(w - margin, nodeY);
-      ctx.strokeStyle = 'rgba(244, 242, 234, 0.1)';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      // Draw active progression line up to activeStep
-      const computedAccent = (getComputedStyle(document.documentElement).getPropertyValue('--accent-color') || '#FFC400').trim();
-      const activeX = margin + activeStep * stepWidth;
-      ctx.beginPath();
-      ctx.moveTo(margin, nodeY);
-      ctx.lineTo(activeX, nodeY);
-      ctx.strokeStyle = computedAccent || '#FFC400';
-      ctx.lineWidth = 3;
-      ctx.shadowColor = 'rgba(255, 196, 0, 0.5)';
-      ctx.shadowBlur = 10;
-      ctx.stroke();
-      ctx.shadowBlur = 0; // reset
-
-      // Animate energy particles traveling along flow line
-      flowParticles.forEach((p) => {
-        p.progress += p.speed;
-        if (p.progress > 1) p.progress = 0;
-
-        const pX = margin + p.progress * (w - margin * 2);
-        const pY = nodeY + Math.sin(p.progress * Math.PI * 8 + Date.now() * 0.003) * 6 + p.offsetY;
-
-        const isPassedActive = pX <= activeX;
-
-        ctx.beginPath();
-        ctx.arc(pX, pY, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = isPassedActive ? 'rgba(255, 220, 100, 0.9)' : 'rgba(244, 242, 234, 0.3)';
-        ctx.fill();
-
-        if (isPassedActive) {
-          ctx.beginPath();
-          ctx.arc(pX, pY, p.size * 2, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255, 196, 0, 0.2)';
-          ctx.fill();
-        }
-      });
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    render();
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [activeStep]);
+  const [active, setActive] = useState(0);
 
   return (
-    <section className="section section-dark" id="da-luz-a-energia">
+    <section className="section section-light" id="como-funciona">
       <div className="container">
         <div className="section-header-wrap">
-          <span className="mono-tag">CAPÍTULO 01 · O SOL</span>
-          <h2 className="section-title">Tudo começa com luz.</h2>
-          <p className="section-desc">
-            Visualização da jornada fotovoltaica. Passe o cursor sobre cada etapa para examinar a transformação em tempo real.
-          </p>
+          <span className="mono-tag eyebrow-line">COMO FUNCIONA</span>
+          <h2 className="section-title">Do sol ao seu imóvel.</h2>
+          <p className="section-desc">Quatro etapas simples transformam luz solar em energia pronta para uso.</p>
         </div>
 
-        {/* Horizontal Process Steps Bar */}
-        <div className="flow-timeline-nav">
-          {steps.map((st, idx) => (
-            <div
-              key={st.id}
-              className={`flow-nav-item ${activeStep === idx ? 'active' : ''}`}
-              onClick={() => setActiveStep(idx)}
-              onMouseEnter={() => setCursorState({ text: st.verb })}
-              onMouseLeave={() => setCursorState({ text: null })}
-            >
-              <span className="flow-nav-num">0{idx + 1}</span>
-              <span className="flow-nav-label">{st.verb}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Canvas & Interactive Node Diagram */}
-        <div className="energy-visualizer-card glass-card">
-          <div className="visualizer-canvas-wrap">
-            <canvas ref={canvasRef} />
+        <div className="flow-track">
+          <div className="flow-connector" aria-hidden="true">
+            <div className="flow-connector-fill" style={{ width: `${(active / (FLOW_STEPS.length - 1)) * 100}%` }} />
           </div>
 
-          <div className="visualizer-nodes-overlay">
-            {steps.map((st, idx) => (
-              <div
-                key={st.id}
-                className={`node-point ${activeStep === idx ? 'node-active' : ''}`}
-                onClick={() => setActiveStep(idx)}
-                onMouseEnter={() => setActiveStep(idx)}
-              >
-                <div className="node-dot">
-                  <div className="node-inner-pulse" />
-                </div>
-                <div className="node-meta">
-                  <span className="node-title">{st.label}</span>
-                  <span className="node-sub">{st.sub}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Active Detail Status Card */}
-          <div className="visualizer-detail-box">
-            <div className="detail-status">
-              <span className="status-indicator">●</span>
-              <span>ETAPA 0{activeStep + 1} DE 05</span>
-            </div>
-            <h3 className="detail-title">{steps[activeStep].label} — {steps[activeStep].sub}</h3>
-            <p className="detail-desc">{steps[activeStep].desc}</p>
+          <div className="flow-steps-grid">
+            {FLOW_STEPS.map((step, idx) => {
+              const Icon = window.Icons[step.icon];
+              return (
+                <button
+                  type="button"
+                  key={step.num}
+                  className={`flow-step ${idx === active ? 'is-active' : ''}`}
+                  onMouseEnter={() => { setActive(idx); setCursorState && setCursorState({ text: step.label }); }}
+                  onFocus={() => setActive(idx)}
+                  onMouseLeave={() => setCursorState && setCursorState({ text: null })}
+                >
+                  <div className="flow-step-media">
+                    <span className="flow-step-num">{step.num}</span>
+                    <Icon size={34} strokeWidth={1.5} />
+                  </div>
+                  <span className="flow-step-label">{step.label}</span>
+                  <h3 className="flow-step-title">{step.title}</h3>
+                  <p className="flow-step-desc">{step.desc}</p>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
 
       <style>{`
-        .section-header-wrap {
-          margin-bottom: 3.5rem;
-        }
+        .section-header-wrap { margin-bottom: 3.5rem; max-width: 640px; }
 
         .section-title {
-          font-size: clamp(2.5rem, 5.5vw, 5.5rem);
-          margin-top: 0.75rem;
-          margin-bottom: 1rem;
+          font-size: clamp(2.2rem, 5vw, 3.6rem);
+          margin-top: 0.9rem;
+          margin-bottom: 0.9rem;
+          color: var(--color-text);
         }
 
-        .section-desc {
-          font-size: 1.15rem;
-          color: var(--color-muted-grey);
-          max-width: 600px;
-        }
+        .section-desc { font-size: 1.1rem; color: var(--color-muted); }
 
-        .flow-timeline-nav {
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          gap: 1rem;
-          border-bottom: 1px solid var(--color-border-dark);
-          padding-bottom: 1rem;
-          margin-bottom: 2.5rem;
-        }
+        .flow-track { position: relative; }
 
-        .flow-nav-item {
-          display: flex;
-          flex-direction: column;
-          gap: 0.25rem;
-          cursor: pointer;
-          opacity: 0.4;
-          transition: opacity var(--transition-fast), color var(--transition-fast);
-        }
-
-        .flow-nav-item:hover, .flow-nav-item.active {
-          opacity: 1;
-        }
-
-        .flow-nav-num {
-          font-family: var(--font-mono);
-          font-size: 0.75rem;
-          color: var(--accent-color);
-        }
-
-        .flow-nav-label {
-          font-family: var(--font-display);
-          font-weight: 700;
-          font-size: 0.95rem;
-          letter-spacing: 0.05em;
-        }
-
-        .energy-visualizer-card {
-          position: relative;
-          min-height: 420px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          overflow: hidden;
-        }
-
-        .visualizer-canvas-wrap {
+        .flow-connector {
           position: absolute;
-          inset: 0;
-          height: 220px;
-          top: 30px;
+          top: 52px;
+          left: 6%;
+          width: 88%;
+          height: 2px;
+          background: var(--color-border);
+          z-index: 1;
         }
 
-        .visualizer-canvas-wrap canvas {
-          width: 100%;
+        .flow-connector-fill {
           height: 100%;
+          background: var(--color-yellow);
+          transition: width var(--transition-smooth);
         }
 
-        .visualizer-nodes-overlay {
+        .flow-steps-grid {
           position: relative;
-          z-index: 10;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 3rem 1.5rem 1rem 1.5rem;
+          z-index: 2;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.5rem;
         }
 
-        .node-point {
+        .flow-step {
+          background: var(--color-white);
+          border: 1px solid var(--color-border);
+          border-radius: 20px;
+          padding: 1.75rem 1.5rem 2rem;
+          text-align: left;
+          cursor: pointer;
+          font-family: inherit;
           display: flex;
           flex-direction: column;
-          align-items: center;
-          gap: 0.75rem;
-          cursor: pointer;
+          gap: 0.4rem;
+          transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
         }
 
-        .node-dot {
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          border: 2px solid var(--color-warm-white);
-          background-color: var(--color-solar-black);
+        .flow-step:hover, .flow-step.is-active {
+          border-color: var(--color-yellow);
+          transform: translateY(-4px);
+          box-shadow: 0 18px 36px rgba(8, 46, 32, 0.08);
+        }
+
+        .flow-step-media {
+          width: 100%;
+          height: 88px;
+          border-radius: 14px;
+          background: linear-gradient(135deg, var(--color-green-dark), var(--color-green-deep));
+          color: var(--color-yellow);
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all var(--transition-fast);
-        }
-
-        .node-inner-pulse {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background-color: transparent;
-          transition: background-color var(--transition-fast);
-        }
-
-        .node-active .node-dot {
-          border-color: var(--accent-color);
-          box-shadow: 0 0 15px var(--accent-glow);
-          transform: scale(1.3);
-        }
-
-        .node-active .node-inner-pulse {
-          background-color: var(--accent-color);
-        }
-
-        .node-meta {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-
-        .node-title {
-          font-family: var(--font-display);
-          font-weight: 800;
-          font-size: 0.85rem;
-        }
-
-        .node-sub {
-          font-family: var(--font-mono);
-          font-size: 0.65rem;
-          color: var(--color-muted-grey);
-        }
-
-        .visualizer-detail-box {
+          gap: 0.75rem;
           position: relative;
-          z-index: 10;
-          background: rgba(11, 13, 12, 0.85);
-          border: 1px solid var(--color-border-dark);
-          border-radius: 12px;
-          padding: 1.5rem 2rem;
-          margin-top: 4rem;
-        }
-
-        .detail-status {
-          font-family: var(--font-mono);
-          font-size: 0.7rem;
-          color: var(--accent-color);
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
           margin-bottom: 0.5rem;
         }
 
-        .status-indicator {
-          font-size: 0.6rem;
-          animation: pulseGlow 1.5s infinite;
+        .flow-step-num {
+          position: absolute;
+          top: 0.6rem;
+          left: 0.85rem;
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          color: rgba(247, 245, 238, 0.55);
         }
 
-        .detail-title {
-          font-size: 1.35rem;
-          margin-bottom: 0.4rem;
+        .flow-step-label {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          letter-spacing: 0.1em;
+          color: var(--color-green);
+          font-weight: 500;
         }
 
-        .detail-desc {
-          font-size: 0.95rem;
-          color: rgba(244, 242, 234, 0.8);
+        .flow-step-title {
+          font-size: 1.2rem;
+          color: var(--color-text);
+          line-height: 1.15;
         }
 
-        @media (max-width: 768px) {
-          .flow-timeline-nav {
-            grid-template-columns: repeat(2, 1fr);
-          }
-          .visualizer-nodes-overlay {
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
-          }
+        .flow-step-desc { font-size: 0.92rem; color: var(--color-muted); line-height: 1.5; }
+
+        @media (max-width: 900px) {
+          .flow-connector { display: none; }
+          .flow-steps-grid { grid-template-columns: 1fr; gap: 1.1rem; }
         }
       `}</style>
     </section>

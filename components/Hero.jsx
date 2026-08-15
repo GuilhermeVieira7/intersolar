@@ -1,200 +1,179 @@
-const { useState } = React;
-
-const Hero = ({ setCursorState, onExploreClick, isExpanding }) => {
+const Hero = ({ setCursorState }) => {
   return (
-    <section className="hero-section" id="hero">
-      <div className="hero-canvas-container">
-        <window.SolarSystem isExpanding={isExpanding} />
-      </div>
+    <section className="hero-section section-deep" id="hero">
+      <div className="hero-grid container">
+        <div className="hero-copy">
+          <span className="mono-tag eyebrow-line">ENERGIA SOLAR EM PARAUAPEBAS E REGIÃO</span>
 
-      <div className="hero-content container">
-        <div className="hero-badge-wrap">
-          <span className="mono-tag">INTERSOLAR</span>
-          <span className="hero-badge-divider">/</span>
-          <span className="hero-badge-sub">ENERGIA SOLAR · PARAUAPEBAS</span>
+          <h1 className="hero-heading">
+            Transforme <span className="solar-word">sol</span> em economia.
+          </h1>
+
+          <p className="hero-subtext">
+            Projetos de energia solar para residências e empresas, com atendimento especializado do início à instalação.
+          </p>
+
+          <div className="hero-cta-group">
+            <a
+              href="https://wa.me/5594999999999?text=Ol%C3%A1%21+Vim+pelo+site+da+InterSolar+e+gostaria+de+solicitar+um+or%C3%A7amento."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+              onMouseEnter={() => setCursorState && setCursorState({ text: 'WHATSAPP' })}
+              onMouseLeave={() => setCursorState && setCursorState({ text: null })}
+            >
+              <span>Solicitar orçamento</span>
+              <window.Icons.ArrowRight size={18} strokeWidth={2} />
+            </a>
+
+            <a
+              href="https://wa.me/5594999999999?text=Ol%C3%A1%21+Gostaria+de+falar+com+um+especialista+da+InterSolar."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+            >
+              <span>Falar com especialista</span>
+            </a>
+          </div>
+
+          <ul className="hero-trust-row">
+            <li><window.Icons.Check size={16} strokeWidth={2.25} /> Projeto personalizado</li>
+            <li><window.Icons.Check size={16} strokeWidth={2.25} /> Atendimento especializado</li>
+            <li><window.Icons.Check size={16} strokeWidth={2.25} /> Energia limpa</li>
+          </ul>
         </div>
 
-        <h1 className="hero-heading">
-          A energia começa no <span className="solar-word">sol.</span>
-          <br />
-          <span className="engineering-word">O resto é engenharia.</span>
-        </h1>
+        <div className="hero-visual" aria-hidden="true">
+          <svg viewBox="0 0 520 480" className="hero-illustration">
+            <defs>
+              <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#FFD93D" stopOpacity="0.9" />
+                <stop offset="55%" stopColor="#FFC900" stopOpacity="0.28" />
+                <stop offset="100%" stopColor="#FFC900" stopOpacity="0" />
+              </radialGradient>
+              <linearGradient id="panelGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#0B3D28" />
+                <stop offset="100%" stopColor="#082E20" />
+              </linearGradient>
+            </defs>
 
-        <p className="hero-subtext">
-          Projeto, instalação e homologação completa para transformar o potencial solar do seu imóvel em energia.
-        </p>
+            <circle cx="390" cy="110" r="150" fill="url(#sunGlow)" />
+            <circle cx="390" cy="110" r="46" fill="#FFC900" />
+            {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
+              <line
+                key={deg}
+                x1={390 + Math.cos((deg * Math.PI) / 180) * 62}
+                y1={110 + Math.sin((deg * Math.PI) / 180) * 62}
+                x2={390 + Math.cos((deg * Math.PI) / 180) * 82}
+                y2={110 + Math.sin((deg * Math.PI) / 180) * 82}
+                stroke="#FFD93D"
+                strokeWidth="4"
+                strokeLinecap="round"
+              />
+            ))}
 
-        <div className="hero-cta-group">
-          <a
-            href="https://wa.me/5594999999999?text=Ol%C3%A1%21+Vim+pelo+site+da+Intersolar+e+gostaria+de+solicitar+um+or%C3%A7amento."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-            onMouseEnter={() => setCursorState({ text: 'WHATSAPP' })}
-            onMouseLeave={() => setCursorState({ text: null })}
-          >
-            <span>SOLICITAR ORÇAMENTO</span>
-            <span className="arrow">→</span>
-          </a>
+            {/* Telhado */}
+            <path d="M40 330 L260 210 L480 330 L480 340 L40 340 Z" fill="#0B3D28" />
+            <path d="M40 330 L260 210 L480 330" fill="none" stroke="#17633C" strokeWidth="3" />
 
-          <button
-            type="button"
-            className="btn-secondary"
-            onClick={onExploreClick}
-            onMouseEnter={() => setCursorState({ text: 'EXPLORAR' })}
-            onMouseLeave={() => setCursorState({ text: null })}
-          >
-            <span>EXPLORAR A EXPERIÊNCIA</span>
-            <span className="down-arrow">↓</span>
-          </button>
-        </div>
-      </div>
+            {/* Painéis solares sobre o telhado */}
+            <g transform="translate(120 246) rotate(-15)">
+              {[0, 1, 2].map((row) => (
+                <g key={row} transform={`translate(0 ${row * 34})`}>
+                  {[0, 1, 2, 3].map((col) => (
+                    <rect
+                      key={col}
+                      x={col * 46}
+                      y="0"
+                      width="42"
+                      height="30"
+                      rx="2"
+                      fill="url(#panelGrad)"
+                      stroke="#FFC900"
+                      strokeWidth="1.2"
+                    />
+                  ))}
+                </g>
+              ))}
+            </g>
 
-      <div className="hero-footer container">
-        <div className="hero-footer-left">
-          <span className="mono-label">LOCALIZAÇÃO</span>
-          <span className="hero-footer-val">PARAUAPEBAS + REGIÃO</span>
-        </div>
-
-        <div className="hero-scroll-prompt" onClick={onExploreClick}>
-          <span>SCROLL TO DISCOVER</span>
-          <div className="scroll-bar-line"></div>
+            {/* Base do imóvel */}
+            <rect x="40" y="340" width="440" height="110" fill="#F7F5EE" stroke="#0B3D28" strokeWidth="2" />
+            <rect x="230" y="380" width="70" height="70" fill="#0B3D28" />
+            <rect x="90" y="370" width="60" height="50" fill="#FFFFFF" stroke="#0B3D28" strokeWidth="2" />
+            <rect x="370" y="370" width="60" height="50" fill="#FFFFFF" stroke="#0B3D28" strokeWidth="2" />
+          </svg>
         </div>
       </div>
 
       <style>{`
         .hero-section {
           position: relative;
-          width: 100%;
-          min-height: 100vh;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          padding-top: calc(var(--header-height) + 2rem);
-          padding-bottom: 2rem;
+          padding-top: calc(var(--header-height) + 2.5rem);
+          padding-bottom: 3.5rem;
           overflow: hidden;
-          background: radial-gradient(circle at 50% 50%, rgba(21, 24, 23, 0.4) 0%, var(--color-solar-black) 90%);
         }
 
-        .hero-canvas-container {
-          position: absolute;
-          inset: 0;
-          z-index: 1;
-        }
-
-        .hero-content {
-          position: relative;
-          z-index: 10;
-          max-width: 1100px;
-          margin-top: auto;
-          margin-bottom: auto;
-          padding-top: 3rem;
-        }
-
-        .hero-badge-wrap {
-          display: flex;
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1.05fr 0.95fr;
+          gap: clamp(2rem, 5vw, 4rem);
           align-items: center;
-          gap: 0.75rem;
-          margin-bottom: 1.75rem;
+          min-height: calc(100vh - var(--header-height) - 3rem);
         }
 
-        .hero-badge-divider {
-          color: var(--color-border-dark);
-          font-family: var(--font-mono);
-        }
-
-        .hero-badge-sub {
-          font-family: var(--font-mono);
-          font-size: 0.75rem;
-          color: var(--color-muted-grey);
-          letter-spacing: 0.1em;
+        .hero-heading {
+          font-size: clamp(2.6rem, 6.2vw, 5.4rem);
+          margin-top: 1.5rem;
+          margin-bottom: 1.5rem;
+          color: var(--color-offwhite);
         }
 
         .hero-subtext {
-          font-size: clamp(1.1rem, 2vw, 1.5rem);
-          color: rgba(244, 242, 234, 0.82);
-          max-width: 680px;
-          font-weight: 300;
-          line-height: 1.5;
-          margin-bottom: 2.75rem;
+          font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+          color: var(--color-muted-onDark);
+          max-width: 520px;
+          font-weight: 400;
+          line-height: 1.6;
+          margin-bottom: 2.5rem;
         }
 
         .hero-cta-group {
           display: flex;
           align-items: center;
-          gap: 1.25rem;
+          gap: 1.1rem;
           flex-wrap: wrap;
+          margin-bottom: 2.75rem;
         }
 
-        .hero-footer {
-          position: relative;
-          z-index: 10;
+        .hero-trust-row {
           display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          border-top: 1px solid rgba(244, 242, 234, 0.08);
+          flex-wrap: wrap;
+          gap: 1.5rem;
+          list-style: none;
+          border-top: 1px solid var(--color-border-onDark);
           padding-top: 1.5rem;
-          margin-top: 2rem;
         }
 
-        .hero-footer-left {
-          display: flex;
-          flex-direction: column;
-          gap: 0.25rem;
-        }
-
-        .mono-label {
-          font-family: var(--font-mono);
-          font-size: 0.65rem;
-          color: var(--color-muted-grey);
-          letter-spacing: 0.15em;
-        }
-
-        .hero-footer-val {
-          font-family: var(--font-mono);
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: var(--color-warm-white);
-        }
-
-        .hero-scroll-prompt {
+        .hero-trust-row li {
           display: flex;
           align-items: center;
-          gap: 1rem;
-          font-family: var(--font-mono);
-          font-size: 0.75rem;
-          color: var(--color-muted-grey);
-          letter-spacing: 0.12em;
-          cursor: pointer;
-          transition: color var(--transition-fast);
+          gap: 0.5rem;
+          font-family: var(--font-display);
+          font-weight: 600;
+          font-size: 0.9rem;
+          color: var(--color-offwhite);
         }
 
-        .hero-scroll-prompt:hover {
-          color: var(--accent-color);
-        }
+        .hero-trust-row li svg { color: var(--color-yellow); }
 
-        .scroll-bar-line {
-          width: 40px;
-          height: 1px;
-          background-color: var(--color-muted-grey);
-          position: relative;
-          overflow: hidden;
-        }
+        .hero-visual { position: relative; }
+        .hero-illustration { width: 100%; height: auto; }
 
-        .scroll-bar-line::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 50%;
-          height: 100%;
-          background-color: var(--accent-color);
-          animation: slideScrollLine 2s infinite cubic-bezier(0.65, 0, 0.35, 1);
-        }
-
-        @keyframes slideScrollLine {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(200%); }
+        @media (max-width: 900px) {
+          .hero-grid { grid-template-columns: 1fr; min-height: auto; }
+          .hero-visual { order: -1; max-width: 380px; margin: 0 auto; }
+          .hero-section { padding-top: calc(var(--header-height) + 1.5rem); }
         }
       `}</style>
     </section>

@@ -1,103 +1,79 @@
-const Benefits = ({ setCursorState }) => {
-  const benefitCards = [
-    {
-      num: '01',
-      title: 'ECONOMIA',
-      subtitle: 'REDUÇÃO DE CUSTO PASSIVO',
-      desc: 'Uma estratégia direta para reduzir a dependência da tarifa convencional da distribuidora e estabilizar os custos operacionais do imóvel.'
-    },
-    {
-      num: '02',
-      title: 'GERAÇÃO PRÓPRIA',
-      subtitle: 'AUTONOMIA PATRIMONIAL',
-      desc: 'Produza energia limpa no próprio imóvel, transformando o espaço da sua cobertura ou solo em um ativo gerador de recursos.'
-    },
-    {
-      num: '03',
-      title: 'PLANEJAMENTO',
-      subtitle: 'ESTRATÉGIA DE LONGO PRAZO',
-      desc: 'Transforme o custo de energia em uma decisão financeira previsível e protegida das variações das bandeiras tarifárias.'
-    }
-  ];
+const BENEFITS = [
+  { icon: 'TrendingDown', title: 'Redução da dependência da rede', desc: 'Gerar parte da própria energia diminui a dependência da tarifa da concessionária.' },
+  { icon: 'Sun', title: 'Aproveitamento da energia solar', desc: 'Uso direto de um recurso abundante na região de Parauapebas.' },
+  { icon: 'Leaf', title: 'Sustentabilidade', desc: 'Geração de energia limpa, com menor impacto ambiental ao longo do tempo.' },
+  { icon: 'House', title: 'Valorização do imóvel', desc: 'Um sistema fotovoltaico é um ativo agregado à propriedade.' },
+  { icon: 'Gauge', title: 'Previsibilidade energética', desc: 'Mais controle sobre o comportamento do consumo de energia do imóvel.' },
+  { icon: 'ShieldCheck', title: 'Solução personalizada', desc: 'Cada projeto é dimensionado de acordo com a realidade do cliente.' },
+];
 
+const Benefits = ({ setCursorState }) => {
   return (
-    <section className="section section-light-theme" id="beneficios">
+    <section className="section section-light section-light-theme" id="beneficios">
       <div className="container">
-        <div className="section-header-wrap" style={{ marginBottom: '4rem' }}>
-          <span className="mono-tag">PILARES DE VALOR</span>
-          <h2 className="section-title" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', marginTop: '0.75rem', color: 'var(--color-black-text)' }}>Por que energia solar?</h2>
+        <div className="benefits-header">
+          <span className="mono-tag eyebrow-line">BENEFÍCIOS</span>
+          <h2 className="benefits-title">Por que considerar energia solar?</h2>
         </div>
 
         <div className="benefits-grid">
-          {benefitCards.map((b) => (
-            <div
-              key={b.num}
-              className="benefit-card"
-              onMouseEnter={() => setCursorState({ text: b.title })}
-              onMouseLeave={() => setCursorState({ text: null })}
-            >
-              <span className="b-num">{b.num}</span>
-              <span className="b-sub">{b.subtitle}</span>
-              <h3 className="b-title">{b.title}</h3>
-              <p className="b-desc">{b.desc}</p>
-            </div>
-          ))}
+          {BENEFITS.map((b) => {
+            const Icon = window.Icons[b.icon];
+            return (
+              <div
+                key={b.title}
+                className="benefit-item"
+                onMouseEnter={() => setCursorState && setCursorState({ text: null })}
+              >
+                <div className="benefit-icon"><Icon size={24} strokeWidth={1.6} /></div>
+                <h3 className="benefit-title">{b.title}</h3>
+                <p className="benefit-desc">{b.desc}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
 
       <style>{`
+        .benefits-header { max-width: 640px; margin-bottom: 3rem; }
+
+        .benefits-title {
+          font-size: clamp(2.2rem, 5vw, 3.4rem);
+          margin-top: 0.9rem;
+          color: var(--color-text);
+        }
+
         .benefits-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
+          gap: 2.25rem 2rem;
         }
 
-        .benefit-card {
-          background: #FFFFFF;
-          border: 1px solid var(--color-border-light);
-          border-radius: 24px;
-          padding: clamp(2rem, 3vw, 3rem);
+        .benefit-item {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
-          transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+          gap: 0.65rem;
+          padding-top: 1.5rem;
+          border-top: 2px solid var(--color-border);
         }
 
-        .benefit-card:hover {
-          transform: translateY(-6px);
-          border-color: var(--color-tech-green);
-          box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+        .benefit-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          background: var(--color-green-deep);
+          color: var(--color-yellow);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 0.25rem;
         }
 
-        .b-num {
-          font-family: var(--font-mono);
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: var(--color-tech-green);
-        }
-
-        .b-sub {
-          font-family: var(--font-mono);
-          font-size: 0.65rem;
-          color: var(--color-grey-muted);
-          letter-spacing: 0.1em;
-        }
-
-        .b-title {
-          font-size: clamp(1.8rem, 3vw, 2.5rem);
-          color: var(--color-black-text);
-        }
-
-        .b-desc {
-          font-size: 1.05rem;
-          color: var(--color-grey-muted);
-          line-height: 1.6;
-        }
+        .benefit-title { font-size: 1.2rem; color: var(--color-text); }
+        .benefit-desc { font-size: 0.95rem; color: var(--color-muted); line-height: 1.55; }
 
         @media (max-width: 900px) {
-          .benefits-grid {
-            grid-template-columns: 1fr;
-          }
+          .benefits-grid { grid-template-columns: 1fr; gap: 1.75rem; }
         }
       `}</style>
     </section>
