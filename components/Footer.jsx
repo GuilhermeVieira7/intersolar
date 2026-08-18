@@ -27,7 +27,7 @@ const Footer = ({ setCursorState }) => {
           <div className="footer-contact-col">
             <span className="footer-col-title">CONTATO</span>
             <div className="contact-items">
-              <a href="https://wa.me/5594999999999" target="_blank" rel="noopener noreferrer" className="footer-contact-link">
+              <a href="https://wa.me/559491489811" target="_blank" rel="noopener noreferrer" className="footer-contact-link">
                 <window.Icons.MessageCircle size={16} strokeWidth={1.8} />
                 <span>WhatsApp de atendimento</span>
               </a>

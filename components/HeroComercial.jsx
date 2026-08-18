@@ -27,7 +27,7 @@ const HeroComercial = ({ setCursorState, onCalculateClick }) => {
             </button>
 
             <a
-              href="https://wa.me/5594999999999?text=Ol%C3%A1%21+Vim+pelo+site+comercial+da+InterSolar+e+gostaria+de+falar+com+um+especialista."
+              href="https://wa.me/559491489811?text=Ol%C3%A1%21+Vim+pelo+site+comercial+da+InterSolar+e+gostaria+de+falar+com+um+especialista."
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary"

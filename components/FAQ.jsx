@@ -55,7 +55,7 @@ const FAQ = ({ setCursorState }) => {
         <div className="faq-footer">
           <span className="faq-footer-text">Ainda ficou com alguma dúvida?</span>
           <a
-            href="https://wa.me/5594999999999?text=Ol%C3%A1%21+Gostaria+de+tirar+uma+d%C3%BAvida+sobre+energia+solar."
+            href="https://wa.me/559491489811?text=Ol%C3%A1%21+Gostaria+de+tirar+uma+d%C3%BAvida+sobre+energia+solar."
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary"

@@ -58,7 +58,7 @@ const Simulator = ({ setCursorState }) => {
               <div>
                 <p className="sim-disclaimer">* Estimativa ilustrativa. O dimensionamento e a economia reais dependem da análise técnica do imóvel.</p>
                 <a
-                  href="https://wa.me/5594999999999?text=Ol%C3%A1%21+Fiz+uma+simula%C3%A7%C3%A3o+no+site+e+quero+uma+an%C3%A1lise+real."
+                  href="https://wa.me/559491489811?text=Ol%C3%A1%21+Fiz+uma+simula%C3%A7%C3%A3o+no+site+e+quero+uma+an%C3%A1lise+real."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary sim-cta"

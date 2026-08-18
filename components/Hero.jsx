@@ -15,7 +15,7 @@ const Hero = ({ setCursorState }) => {
 
           <div className="hero-cta-group">
             <a
-              href="https://wa.me/5594999999999?text=Ol%C3%A1%21+Vim+pelo+site+da+InterSolar+e+gostaria+de+solicitar+um+or%C3%A7amento."
+              href="https://wa.me/559491489811?text=Ol%C3%A1%21+Vim+pelo+site+da+InterSolar+e+gostaria+de+solicitar+um+or%C3%A7amento."
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"
@@ -27,7 +27,7 @@ const Hero = ({ setCursorState }) => {
             </a>
 
             <a
-              href="https://wa.me/5594999999999?text=Ol%C3%A1%21+Gostaria+de+falar+com+um+especialista+da+InterSolar."
+              href="https://wa.me/559491489811?text=Ol%C3%A1%21+Gostaria+de+falar+com+um+especialista+da+InterSolar."
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary"

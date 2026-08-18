@@ -1,7 +1,7 @@
 const FloatingWhatsApp = () => {
   return (
     <a
-      href="https://wa.me/5594999999999?text=Ol%C3%A1%21+Vim+pelo+site+da+Intersolar+e+gostaria+de+solicitar+um+or%C3%A7amento+de+energia+solar."
+      href="https://wa.me/559491489811?text=Ol%C3%A1%21+Vim+pelo+site+da+Intersolar+e+gostaria+de+solicitar+um+or%C3%A7amento+de+energia+solar."
       target="_blank"
       rel="noopener noreferrer"
       className="floating-whatsapp-btn"

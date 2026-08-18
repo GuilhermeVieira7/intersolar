@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { href: '#faq', label: 'Perguntas frequentes' },
 ];
 
-const WHATSAPP_HREF = 'https://wa.me/5594999999999?text=Ol%C3%A1%21+Vim+pelo+site+da+InterSolar+e+gostaria+de+solicitar+um+or%C3%A7amento.';
+const WHATSAPP_HREF = 'https://wa.me/559491489811?text=Ol%C3%A1%21+Vim+pelo+site+da+InterSolar+e+gostaria+de+solicitar+um+or%C3%A7amento.';
 
 const Nav = ({ setCursorState }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
