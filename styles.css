@@ -42,7 +42,6 @@ html {
   line-height: 1.6;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 body { position: relative; width: 100%; min-height: 100vh; background-color: var(--color-offwhite); overflow-x: hidden; }

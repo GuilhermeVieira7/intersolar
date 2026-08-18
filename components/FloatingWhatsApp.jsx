@@ -55,11 +55,15 @@ const FloatingWhatsApp = () => {
 
         @keyframes pulseWhatsApp {
           0%, 100% {
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
           }
           50% {
-            box-shadow: 0 0 35px rgba(37, 211, 102, 0.85);
+            box-shadow: 0 8px 26px rgba(37, 211, 102, 0.6);
           }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .floating-whatsapp-btn { animation: none; }
         }
 
         @media (max-width: 900px) {
