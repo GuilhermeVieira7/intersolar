@@ -23,6 +23,7 @@ const AppComercial = () => {
         <Founder setCursorState={setCursorState} />
         <About setCursorState={setCursorState} />
         <Projects setCursorState={setCursorState} />
+        <Videos setCursorState={setCursorState} />
         <FAQ setCursorState={setCursorState} />
         <FinalCTA setCursorState={setCursorState} />
       </main>

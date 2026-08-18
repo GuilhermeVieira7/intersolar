@@ -32,7 +32,7 @@ const About = ({ setCursorState }) => {
         <div className="about-proof-col card">
           <div className="proof-header">
             <div className="proof-avatar">
-              <img src="fotos/logo%20inter%20solar.png" alt="" width="30" height="30" />
+              <img src="fotos/logo-mark-color.png" alt="" width="30" height="30" />
             </div>
             <div>
               <h3 className="proof-username">@intersolarpa</h3>

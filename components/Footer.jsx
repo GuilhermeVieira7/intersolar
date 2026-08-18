@@ -5,8 +5,7 @@ const Footer = ({ setCursorState }) => {
         <div className="footer-top">
           <div className="footer-brand-col">
             <a href="#hero" className="footer-logo">
-              <img src="fotos/logo%20inter%20solar.png" alt="InterSolar Energia Renovável" width="38" height="38" />
-              <span className="footer-logo-text">INTERSOLAR</span>
+              <img src="fotos/logo-horizontal-ondark.png" alt="InterSolar Energia Renovável" height="46" />
             </a>
             <span className="footer-subtext">ENERGIA SOLAR · PARAUAPEBAS + REGIÃO</span>
             <p className="footer-tagline">
@@ -69,9 +68,8 @@ const Footer = ({ setCursorState }) => {
 
         .footer-brand-col { display: flex; flex-direction: column; gap: 0.75rem; }
 
-        .footer-logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; color: var(--color-offwhite); }
-        .footer-logo img { object-fit: contain; }
-        .footer-logo-text { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; }
+        .footer-logo { display: inline-flex; align-items: center; text-decoration: none; }
+        .footer-logo img { object-fit: contain; width: auto; }
 
         .footer-subtext {
           font-family: var(--font-mono);

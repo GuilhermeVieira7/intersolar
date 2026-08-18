@@ -34,11 +34,8 @@ const Nav = ({ setCursorState }) => {
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="nav-container container">
         <a href="#hero" className="logo-brand" aria-label="InterSolar Energia Renovável — início">
-          <img src="fotos/logo%20inter%20solar.png" alt="InterSolar Energia Renovável" className="logo-img" width="40" height="40" />
-          <span className="logo-text-group">
-            <span className="logo-text">INTERSOLAR</span>
-            <span className="logo-sub">PARAUAPEBAS + REGIÃO</span>
-          </span>
+          <img src="fotos/logo-horizontal-color.png" alt="InterSolar Energia Renovável" className="logo-img" height="34" />
+          <span className="logo-sub">PARAUAPEBAS + REGIÃO</span>
         </a>
 
         <nav className="header-nav-links desktop-only" aria-label="Navegação principal">
@@ -125,33 +122,24 @@ const Nav = ({ setCursorState }) => {
         }
 
         .logo-img {
-          width: 40px;
-          height: 40px;
+          height: 34px;
+          width: auto;
           object-fit: contain;
           flex-shrink: 0;
         }
 
-        .logo-text-group {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .logo-text {
-          font-family: var(--font-display);
-          font-weight: 800;
-          font-size: 1.1rem;
-          line-height: 1;
-          letter-spacing: -0.01em;
-          color: var(--color-green-deep);
-        }
-
         .logo-sub {
           font-family: var(--font-mono);
-          font-size: 0.58rem;
+          font-size: 0.6rem;
           color: var(--color-green);
           font-weight: 500;
           letter-spacing: 0.08em;
-          margin-top: 0.2rem;
+          padding-left: 0.75rem;
+          border-left: 1px solid var(--color-border);
+        }
+
+        @media (max-width: 480px) {
+          .logo-sub { display: none; }
         }
 
         .header-nav-links {

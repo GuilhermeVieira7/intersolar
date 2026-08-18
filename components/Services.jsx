@@ -19,6 +19,18 @@ const SOLUTIONS = [
     title: 'Energia Solar Empresarial',
     desc: 'Projetos dimensionados conforme as características e necessidades de cada operação.',
   },
+  {
+    id: '04',
+    icon: 'Zap',
+    title: 'Sistema Híbrido com Backup',
+    desc: 'Solução que combina geração solar e backup de energia, mantendo o imóvel abastecido em quedas da rede.',
+  },
+  {
+    id: '05',
+    icon: 'BatteryCharging',
+    title: 'BESS — Armazenamento de Energia',
+    desc: 'Armazenamento de energia em baterias para uso posterior, aumentando a autonomia do sistema.',
+  },
 ];
 
 const Services = ({ setCursorState }) => {
