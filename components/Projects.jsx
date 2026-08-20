@@ -13,8 +13,8 @@ const PROJECT_ITEMS = [
   },
   {
     img: 'fotos/projeto-comercial-instalacao.jpg',
-    type: 'Instalação em campo',
-    title: 'Equipe InterSolar durante a instalação',
+    type: 'Energia Solar Comercial',
+    title: 'Projeto comercial em Parauapebas',
     size: 'wide',
   },
   {
