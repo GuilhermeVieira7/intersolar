@@ -1,24 +1,24 @@
 const PROJECT_ITEMS = [
   {
-    img: 'fotos/projeto-comercial-depois.jpg',
+    img: 'fotos/projeto-comercial-depois.webp',
     type: 'Energia Solar Comercial',
     title: 'Projeto comercial — cobertura executada',
     size: 'large',
   },
   {
-    img: 'fotos/hero-residencial.jpg',
+    img: 'fotos/hero-residencial.webp',
     type: 'Energia Solar Residencial',
     title: 'Residência Mirante',
     size: 'tall',
   },
   {
-    img: 'fotos/projeto-comercial-instalacao.jpg',
+    img: 'fotos/projeto-comercial-instalacao.webp',
     type: 'Energia Solar Comercial',
     title: 'Projeto comercial em Parauapebas',
     size: 'wide',
   },
   {
-    img: 'fotos/projeto-residencial-mirante.jpg',
+    img: 'fotos/projeto-residencial-mirante.webp',
     type: 'Energia Solar Residencial',
     title: 'Residência Mirante — vista aérea',
     size: 'small',
@@ -58,11 +58,11 @@ const Projects = ({ setCursorState }) => {
           </div>
           <div className="ad-grid">
             <figure className="ad-figure">
-              <img src="fotos/projeto-comercial-antes.jpg" alt="Cobertura comercial antes da instalação dos painéis solares" loading="lazy" />
+              <img src="fotos/projeto-comercial-antes.webp" alt="Cobertura comercial antes da instalação dos painéis solares" loading="lazy" />
               <figcaption>Antes</figcaption>
             </figure>
             <figure className="ad-figure">
-              <img src="fotos/projeto-comercial-depois.jpg" alt="Cobertura comercial depois da instalação dos painéis solares" loading="lazy" />
+              <img src="fotos/projeto-comercial-depois.webp" alt="Cobertura comercial depois da instalação dos painéis solares" loading="lazy" />
               <figcaption>Depois</figcaption>
             </figure>
           </div>

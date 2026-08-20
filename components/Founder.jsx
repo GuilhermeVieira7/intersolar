@@ -4,7 +4,7 @@ const Founder = ({ setCursorState }) => {
       <div className="container founder-grid">
         <div className="founder-photo-col">
           <img
-            src="fotos/foto%20gilvan%20dono.png"
+            src="fotos/foto%20gilvan%20dono.webp"
             alt="Gilvan, fundador da InterSolar Energia Renovável"
             className="founder-photo"
             loading="lazy"

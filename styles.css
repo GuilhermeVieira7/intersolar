@@ -1,5 +1,5 @@
 /* INTERSOLAR ENERGIA RENOVÁVEL — DESIGN SYSTEM (SITE RESIDENCIAL) */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
+/* Fonte Google carregada via <link> no <head> do HTML, não por @import (evita bloqueio de renderização). */
 
 :root {
   /* Paleta InterSolar */

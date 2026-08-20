@@ -46,9 +46,12 @@ const HeroComercial = ({ setCursorState, onCalculateClick }) => {
         <div className="hero-visual" aria-hidden="true">
           <div className="hero-photo-frame">
             <img
-              src="fotos/hero-comercial.jpg"
+              src="fotos/hero-comercial.webp"
               alt="Cobertura comercial com painéis solares instalados pela InterSolar"
               className="hero-photo"
+              width="1400"
+              height="787"
+              fetchpriority="high"
             />
             <div className="hero-photo-overlay" />
             <span className="hero-photo-accent" />

@@ -46,9 +46,12 @@ const Hero = ({ setCursorState }) => {
         <div className="hero-visual" aria-hidden="true">
           <div className="hero-photo-frame">
             <img
-              src="fotos/hero-residencial.jpg"
+              src="fotos/hero-residencial.webp"
               alt="Residência com painéis solares instalados pela InterSolar em Parauapebas"
               className="hero-photo"
+              width="1400"
+              height="787"
+              fetchpriority="high"
             />
             <div className="hero-photo-overlay" />
             <span className="hero-photo-accent" />
