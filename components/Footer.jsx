@@ -37,7 +37,7 @@ const Footer = ({ setCursorState }) => {
               </a>
               <span className="footer-location-text">
                 <window.Icons.MapPin size={16} strokeWidth={1.8} />
-                Parauapebas e região / PA
+                Avenida J, Quadra 10, Lotes 09 ao 13, Bairro Jardim Canadá, Parauapebas - PA, CEP 68515-000
               </span>
             </div>
           </div>
