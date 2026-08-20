@@ -35,10 +35,15 @@ const Footer = ({ setCursorState }) => {
                 <window.Icons.Instagram size={16} strokeWidth={1.8} />
                 <span>@intersolarpa</span>
               </a>
-              <span className="footer-location-text">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Avenida+J,+Quadra+10,+Lotes+09+ao+13,+Bairro+Jardim+Canad%C3%A1,+Parauapebas+-+PA,+68515-000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-contact-link"
+              >
                 <window.Icons.MapPin size={16} strokeWidth={1.8} />
                 Avenida J, Quadra 10, Lotes 09 ao 13, Bairro Jardim Canadá, Parauapebas - PA, CEP 68515-000
-              </span>
+              </a>
             </div>
           </div>
         </div>
@@ -95,15 +100,14 @@ const Footer = ({ setCursorState }) => {
 
         .contact-items { display: flex; flex-direction: column; gap: 0.85rem; }
 
-        .footer-contact-link, .footer-location-text {
+        .footer-contact-link {
           display: flex; align-items: center; gap: 0.55rem;
           color: var(--color-offwhite); text-decoration: none;
           font-family: var(--font-mono); font-size: 0.85rem;
+          transition: color var(--transition-fast);
         }
 
-        .footer-contact-link { transition: color var(--transition-fast); }
         .footer-contact-link:hover { color: var(--color-yellow); }
-        .footer-location-text { color: var(--color-muted-onDark); }
 
         .footer-bottom {
           display: flex; align-items: center; justify-content: space-between;

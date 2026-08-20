@@ -196,14 +196,6 @@ button { font-family: inherit; }
   gap: 0.6rem;
 }
 
-.eyebrow-line::before {
-  content: '';
-  width: 28px;
-  height: 2px;
-  background: var(--color-yellow);
-  display: inline-block;
-}
-
 /* Rótulo de etiqueta numerada usado em várias seções */
 .step-badge {
   width: 44px; height: 44px; border-radius: 50%;
