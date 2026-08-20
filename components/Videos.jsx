@@ -8,8 +8,8 @@ const VIDEO_ITEMS = [
   {
     src: 'fotos/videos/dji-aereo.mp4',
     poster: 'fotos/videos/dji-aereo-poster.jpg',
-    title: 'Vista aérea de uma instalação residencial',
-    desc: 'Registro aéreo de um sistema fotovoltaico executado pela InterSolar.',
+    title: 'Vista aérea de uma instalação comercial',
+    desc: 'Registro aéreo de um sistema fotovoltaico comercial executado pela InterSolar.',
   },
 ];
 
