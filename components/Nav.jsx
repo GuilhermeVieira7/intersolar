@@ -2,12 +2,12 @@ const { useState, useEffect } = React;
 
 const NAV_LINKS = [
   { href: '#hero', label: 'Início' },
+  { href: '/loja', label: 'Loja' },
   { href: '#como-funciona', label: 'Como funciona' },
   { href: '#solucoes', label: 'Soluções' },
   { href: '#projetos', label: 'Projetos' },
   { href: '#sobre', label: 'Sobre' },
   { href: '#faq', label: 'Perguntas frequentes' },
-  { href: '/loja', label: 'Loja' },
 ];
 
 const WHATSAPP_HREF = 'https://wa.me/559491489811?text=Ol%C3%A1%21+Vim+pelo+site+da+InterSolar+e+gostaria+de+solicitar+um+or%C3%A7amento.';
