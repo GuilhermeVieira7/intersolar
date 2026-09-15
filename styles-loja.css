@@ -1,0 +1,6 @@
+/* INTERSOLAR — LOJA (estende o design system definido em styles.css) */
+/* Este arquivo não redefine tokens de marca; apenas ajustes estruturais mínimos da loja. */
+
+.app-loja-wrapper { position: relative; width: 100%; }
+
+input, button { font-size: 16px; }

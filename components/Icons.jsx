@@ -183,6 +183,38 @@ const IconSolarPanel = (props) => (
   </IconBase>
 );
 
+const IconShoppingBag = (props) => (
+  <IconBase {...props}>
+    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+    <path d="M3 6h18" />
+    <path d="M16 10a4 4 0 0 1-8 0" />
+  </IconBase>
+);
+
+const IconDownload = (props) => (
+  <IconBase {...props}>
+    <path d="M12 15V3" /><path d="m7 10 5 5 5-5" />
+    <path d="M20 21H4" />
+  </IconBase>
+);
+
+const IconPackage = (props) => (
+  <IconBase {...props}>
+    <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73Z" />
+    <path d="M12 22V12" /><path d="M3.29 6.96 12 12l8.71-5.04" />
+  </IconBase>
+);
+
+const IconSliders = (props) => (
+  <IconBase {...props}>
+    <line x1="4" x2="4" y1="21" y2="14" /><line x1="4" x2="4" y1="10" y2="3" />
+    <line x1="12" x2="12" y1="21" y2="12" /><line x1="12" x2="12" y1="8" y2="3" />
+    <line x1="20" x2="20" y1="21" y2="16" /><line x1="20" x2="20" y1="12" y2="3" />
+    <line x1="2" x2="6" y1="14" y2="14" /><line x1="10" x2="14" y1="8" y2="8" />
+    <line x1="18" x2="22" y1="16" y2="16" />
+  </IconBase>
+);
+
 window.Icons = {
   Sun: IconSun,
   House: IconHouse,
@@ -209,4 +241,8 @@ window.Icons = {
   X: IconX,
   Wrench: IconWrench,
   SolarPanel: IconSolarPanel,
+  ShoppingBag: IconShoppingBag,
+  Download: IconDownload,
+  Package: IconPackage,
+  Sliders: IconSliders,
 };
