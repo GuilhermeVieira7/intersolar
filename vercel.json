@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/imersivo", "destination": "/imersivo.html" },
-    { "source": "/loja/(.*)", "destination": "/loja.html" }
+  "trailingSlash": false,
+  "routes": [
+    { "src": "/loja/[^/]+/?$", "dest": "/loja.html" },
+    { "src": "/loja/?$", "dest": "/loja.html" },
+    { "src": "/comercial/?$", "dest": "/comercial.html" },
+    { "src": "/imersivo/?$", "dest": "/imersivo.html" },
+    { "handle": "filesystem" }
   ]
 }
