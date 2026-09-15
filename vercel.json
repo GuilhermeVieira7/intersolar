@@ -3,6 +3,6 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/imersivo", "destination": "/imersivo.html" },
-    { "source": "/loja/:slug", "destination": "/loja.html" }
+    { "source": "/loja/(.*)", "destination": "/loja.html" }
   ]
 }
