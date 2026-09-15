@@ -1,20 +1,61 @@
 const { useEffect } = React;
 
-const ProductNotFound = () => (
-  <section className="section section-white product-not-found">
-    <div className="container">
-      <span className="mono-tag eyebrow-line">PRODUTO NÃO ENCONTRADO</span>
-      <h1 className="product-not-found-title">Esse equipamento não está mais disponível.</h1>
-      <p className="product-not-found-text">Confira o catálogo completo de equipamentos da InterSolar.</p>
-      <a href="/loja" className="btn-primary">
-        <span>Voltar para a loja</span>
-        <window.Icons.ArrowRight size={18} strokeWidth={2} />
-      </a>
+const ProductNotFound = ({ setCursorState }) => (
+  <section className="section section-deep product-not-found">
+    <div className="container product-not-found-inner">
+      <img
+        src="fotos/logo-mark-color.png"
+        alt="InterSolar Energia Renovável"
+        className="product-not-found-logo"
+        width="64"
+        height="64"
+      />
+
+      <span className="mono-tag eyebrow-line">EQUIPAMENTO INDISPONÍVEL</span>
+      <h1 className="product-not-found-title">Ops, já estamos trabalhando para consertar!</h1>
+      <p className="product-not-found-text">
+        Esse equipamento não foi encontrado ou está com um link quebrado. Enquanto ajustamos isso,
+        você pode continuar navegando pelo catálogo ou falar direto com a nossa equipe.
+      </p>
+
+      <div className="product-not-found-cta-group">
+        <a
+          href="/loja"
+          className="btn-primary"
+          onMouseEnter={() => setCursorState && setCursorState({ text: 'LOJA' })}
+          onMouseLeave={() => setCursorState && setCursorState({ text: null })}
+        >
+          <span>Voltar para a loja</span>
+          <window.Icons.ArrowRight size={18} strokeWidth={2} />
+        </a>
+
+        <a
+          href="https://wa.me/559491489811?text=Ol%C3%A1%21+Encontrei+um+link+de+produto+quebrado+na+loja+da+InterSolar."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-secondary"
+        >
+          <window.Icons.MessageCircle size={18} strokeWidth={1.8} />
+          <span>Falar com a InterSolar</span>
+        </a>
+      </div>
     </div>
+
     <style>{`
       .product-not-found { padding-top: calc(var(--header-height) + 4rem); text-align: center; }
-      .product-not-found-title { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 1rem 0 0.75rem; }
-      .product-not-found-text { color: var(--color-muted); margin-bottom: 2rem; }
+      .product-not-found-inner { display: flex; flex-direction: column; align-items: center; max-width: 560px; }
+      .product-not-found-logo { margin-bottom: 1.5rem; border-radius: 16px; }
+      .product-not-found-title {
+        font-size: clamp(1.9rem, 4.4vw, 2.7rem);
+        margin: 1rem 0 0.9rem;
+        color: var(--color-offwhite);
+      }
+      .product-not-found-text { color: var(--color-muted-onDark); line-height: 1.6; margin-bottom: 2.25rem; }
+      .product-not-found-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+      @media (max-width: 480px) {
+        .product-not-found-cta-group { flex-direction: column; width: 100%; }
+      }
     `}</style>
   </section>
 );
@@ -52,7 +93,7 @@ const ProductPage = ({ slug, setCursorState }) => {
     };
   }, [product]);
 
-  if (!product) return <ProductNotFound />;
+  if (!product) return <ProductNotFound setCursorState={setCursorState} />;
 
   const categoryLabel = window.STORE_CATEGORIES.find((c) => c.id === product.category)?.label || product.category;
 
