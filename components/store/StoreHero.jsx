@@ -76,6 +76,8 @@ const StoreHero = ({ setCursorState }) => {
           color: var(--color-offwhite);
         }
 
+        .store-hero-heading .solar-word { color: var(--color-yellow); }
+
         .store-hero-subtext {
           font-size: clamp(1.05rem, 1.6vw, 1.25rem);
           color: var(--color-muted-onDark);
@@ -84,6 +86,35 @@ const StoreHero = ({ setCursorState }) => {
           line-height: 1.6;
           margin-bottom: 2.5rem;
         }
+
+        .hero-cta-group {
+          display: flex;
+          align-items: center;
+          gap: 1.1rem;
+          flex-wrap: wrap;
+          margin-bottom: 2.75rem;
+        }
+
+        .hero-trust-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1.5rem;
+          list-style: none;
+          border-top: 1px solid var(--color-border-onDark);
+          padding-top: 1.5rem;
+        }
+
+        .hero-trust-row li {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-family: var(--font-display);
+          font-weight: 600;
+          font-size: 0.9rem;
+          color: var(--color-offwhite);
+        }
+
+        .hero-trust-row li svg { color: var(--color-yellow); }
 
         .store-hero-visual { position: relative; }
 
