@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Limpeza de Painéis Solares | Plano Anual InterSolar Clean</title>
+  <meta name="description" content="Plano anual de limpeza e manutenção de painéis solares em Parauapebas. 4 visitas por ano, limpeza especializada contra a poeira de minério e relatório de geração. R$ 900/ano." />
+  <meta name="keywords" content="Limpeza de Painéis Solares, Manutenção de Placas Solares, Limpeza de Placa Solar Parauapebas, InterSolar Clean, Plano Anual Solar" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Limpeza de Painéis Solares | Plano Anual InterSolar Clean" />
+  <meta property="og:description" content="4 visitas por ano, limpeza especializada contra a poeira de minério de Parauapebas e relatório de geração. R$ 900/ano." />
+  <meta property="og:url" content="https://intersolarpa.com.br/limpeza" />
+  <meta property="og:image" content="https://intersolarpa.com.br/fotos/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <link rel="canonical" href="https://intersolarpa.com.br/limpeza" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="fotos/logo-mark-color.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Limpeza e manutenção de painéis solares",
+    "name": "InterSolar Clean",
+    "description": "Plano anual de limpeza especializada e manutenção preventiva de painéis solares, com 4 visitas técnicas por ano.",
+    "provider": {
+      "@type": "Organization",
+      "name": "InterSolar Energia Renovável",
+      "sameAs": "https://www.instagram.com/intersolarpa"
+    },
+    "areaServed": "Parauapebas e região",
+    "offers": {
+      "@type": "Offer",
+      "price": "900",
+      "priceCurrency": "BRL",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "900",
+        "priceCurrency": "BRL",
+        "billingDuration": "P1Y"
+      }
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles-limpeza.css" />
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="data/plano-limpeza.js"></script>
+
+  <script type="text/babel" src="components/Icons.jsx"></script>
+  <script type="text/babel" src="components/Cursor.jsx"></script>
+  <script type="text/babel" src="components/FloatingWhatsApp.jsx"></script>
+  <script type="text/babel" src="components/Nav.jsx"></script>
+  <script type="text/babel" src="components/Footer.jsx"></script>
+
+  <script type="text/babel" src="components/limpeza/CleaningHero.jsx"></script>
+  <script type="text/babel" src="components/limpeza/DustProblem.jsx"></script>
+  <script type="text/babel" src="components/limpeza/CleaningPlan.jsx"></script>
+  <script type="text/babel" src="components/limpeza/CleaningProcess.jsx"></script>
+  <script type="text/babel" src="components/limpeza/TrustStrip.jsx"></script>
+  <script type="text/babel" src="components/limpeza/CleaningFAQ.jsx"></script>
+  <script type="text/babel" src="components/limpeza/CleaningFinalCTA.jsx"></script>
+
+  <script type="text/babel" src="app-limpeza.jsx"></script>
+  <script type="text/babel">
+    ReactDOM.createRoot(document.getElementById('root')).render(<AppLimpeza />);
+  </script>
+</body>
+</html>

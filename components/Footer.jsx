@@ -21,7 +21,7 @@ const Footer = ({ setCursorState }) => {
               <li><a href="#projetos">Projetos</a></li>
               <li><a href="#sobre">Sobre</a></li>
               <li><a href="#faq">Perguntas frequentes</a></li>
-              <li><a href="/loja">Loja</a></li>
+              <li><a href="/limpeza">Limpeza de Painéis</a></li>
             </ul>
           </div>
 

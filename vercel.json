@@ -2,8 +2,9 @@
   "version": 2,
   "trailingSlash": false,
   "routes": [
-    { "src": "/loja/[^/]+/?$", "dest": "/loja.html" },
-    { "src": "/loja/?$", "dest": "/loja.html" },
+    { "src": "/limpeza/?$", "dest": "/limpeza.html" },
+    { "src": "/loja/?$", "dest": "/limpeza.html" },
+    { "src": "/loja/[^/]+/?$", "dest": "/limpeza.html" },
     { "src": "/comercial/?$", "dest": "/comercial.html" },
     { "src": "/imersivo/?$", "dest": "/imersivo.html" },
     { "handle": "filesystem" }

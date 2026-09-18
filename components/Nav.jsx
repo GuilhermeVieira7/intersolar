@@ -2,7 +2,7 @@ const { useState, useEffect } = React;
 
 const NAV_LINKS = [
   { href: '#hero', label: 'Início' },
-  { href: '/loja', label: 'Loja' },
+  { href: '/limpeza', label: 'Limpeza de Painéis' },
   { href: '#como-funciona', label: 'Como funciona' },
   { href: '#solucoes', label: 'Soluções' },
   { href: '#projetos', label: 'Projetos' },
