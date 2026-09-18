@@ -45,6 +45,17 @@ const CleaningHero = ({ setCursorState }) => {
             Em Parauapebas, a poeira que cobre o vidro dos módulos não é poeira comum — é fina, avermelhada, rica em minério de ferro, e se acumula rápido. Arraste o painel ao lado e veja a diferença.
           </p>
 
+          <a
+            href="#plano"
+            className="cleaning-hero-price-pill"
+            onMouseEnter={() => setCursorState && setCursorState({ text: 'VER PLANO' })}
+            onMouseLeave={() => setCursorState && setCursorState({ text: null })}
+          >
+            <span className="cleaning-hero-price-pill-value">{window.CLEANING_PLAN.priceLabel}<small>/ano</small></span>
+            <span className="cleaning-hero-price-pill-divider" />
+            <span className="cleaning-hero-price-pill-text">Plano único · {window.CLEANING_PLAN.visitsPerYear} limpezas inclusas</span>
+          </a>
+
           <div className="cleaning-hero-cta-group">
             <a
               href={`https://wa.me/559491489811?text=${encodeURIComponent(window.CLEANING_PLAN.whatsappMessage)}`}
@@ -61,12 +72,6 @@ const CleaningHero = ({ setCursorState }) => {
               <span>Ver o que está incluso</span>
             </a>
           </div>
-
-          <ul className="cleaning-hero-trust-row">
-            <li><window.Icons.CalendarCheck size={16} strokeWidth={2.25} /> 4 visitas por ano</li>
-            <li><window.Icons.Droplets size={16} strokeWidth={2.25} /> Limpeza especializada</li>
-            <li><window.Icons.Gauge size={16} strokeWidth={2.25} /> Relatório de geração</li>
-          </ul>
         </div>
 
         <div className="cleaning-hero-visual">
@@ -117,8 +122,8 @@ const CleaningHero = ({ setCursorState }) => {
       <style>{`
         .cleaning-hero {
           position: relative;
-          padding-top: calc(var(--header-height) + 2.5rem);
-          padding-bottom: 3.5rem;
+          padding-top: calc(var(--header-height) + 3rem);
+          padding-bottom: 6rem;
           overflow: hidden;
         }
 
@@ -127,7 +132,6 @@ const CleaningHero = ({ setCursorState }) => {
           grid-template-columns: 1.05fr 0.95fr;
           gap: clamp(2rem, 5vw, 4rem);
           align-items: center;
-          min-height: calc(100vh - var(--header-height) - 3rem);
         }
 
         .cleaning-hero-heading {
@@ -146,7 +150,44 @@ const CleaningHero = ({ setCursorState }) => {
           max-width: 540px;
           font-weight: 400;
           line-height: 1.65;
-          margin-bottom: 2.5rem;
+          margin-bottom: 1.75rem;
+        }
+
+        .cleaning-hero-price-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.9rem;
+          background: rgba(255, 201, 0, 0.08);
+          border: 1px solid rgba(255, 201, 0, 0.35);
+          border-radius: 999px;
+          padding: 0.6rem 1.3rem 0.6rem 0.75rem;
+          margin-bottom: 2rem;
+          text-decoration: none;
+          transition: background-color var(--transition-fast), border-color var(--transition-fast);
+        }
+
+        .cleaning-hero-price-pill:hover { background: rgba(255, 201, 0, 0.14); border-color: rgba(255, 201, 0, 0.55); }
+
+        .cleaning-hero-price-pill-value {
+          font-family: var(--font-display);
+          font-weight: 800;
+          font-size: 1.1rem;
+          color: var(--color-yellow);
+          background: var(--color-green-deep);
+          padding: 0.4rem 0.9rem;
+          border-radius: 999px;
+          white-space: nowrap;
+        }
+
+        .cleaning-hero-price-pill-value small { font-weight: 600; font-size: 0.7rem; color: var(--color-muted-onDark); margin-left: 0.15rem; }
+
+        .cleaning-hero-price-pill-divider { display: none; }
+
+        .cleaning-hero-price-pill-text {
+          font-family: var(--font-display);
+          font-weight: 600;
+          font-size: 0.85rem;
+          color: var(--color-offwhite);
         }
 
         .cleaning-hero-cta-group {
@@ -154,29 +195,7 @@ const CleaningHero = ({ setCursorState }) => {
           align-items: center;
           gap: 1.1rem;
           flex-wrap: wrap;
-          margin-bottom: 2.75rem;
         }
-
-        .cleaning-hero-trust-row {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1.5rem;
-          list-style: none;
-          border-top: 1px solid var(--color-border-onDark);
-          padding-top: 1.5rem;
-        }
-
-        .cleaning-hero-trust-row li {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-family: var(--font-display);
-          font-weight: 600;
-          font-size: 0.88rem;
-          color: var(--color-offwhite);
-        }
-
-        .cleaning-hero-trust-row li svg { color: var(--color-yellow); }
 
         .cleaning-hero-visual { position: relative; }
 
@@ -303,9 +322,9 @@ const CleaningHero = ({ setCursorState }) => {
         }
 
         @media (max-width: 900px) {
-          .cleaning-hero-grid { grid-template-columns: 1fr; min-height: auto; }
+          .cleaning-hero-grid { grid-template-columns: 1fr; }
           .cleaning-hero-visual { order: -1; max-width: 420px; margin: 0 auto; }
-          .cleaning-hero { padding-top: calc(var(--header-height) + 1.5rem); }
+          .cleaning-hero { padding-top: calc(var(--header-height) + 1.5rem); padding-bottom: 5rem; }
         }
       `}</style>
     </section>

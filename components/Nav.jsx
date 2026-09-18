@@ -2,7 +2,7 @@ const { useState, useEffect } = React;
 
 const NAV_LINKS = [
   { href: '#hero', label: 'Início' },
-  { href: '/limpeza', label: 'Limpeza de Painéis' },
+  { href: '/limpeza', label: 'Limpeza' },
   { href: '#como-funciona', label: 'Como funciona' },
   { href: '#solucoes', label: 'Soluções' },
   { href: '#projetos', label: 'Projetos' },
@@ -120,6 +120,7 @@ const Nav = ({ setCursorState }) => {
           gap: 0.75rem;
           text-decoration: none;
           color: var(--color-text);
+          flex-shrink: 0;
         }
 
         .logo-img {
@@ -146,21 +147,25 @@ const Nav = ({ setCursorState }) => {
         .header-nav-links {
           display: flex;
           align-items: center;
-          gap: 1.85rem;
+          gap: clamp(1rem, 1.8vw, 1.85rem);
+          flex-shrink: 1;
+          min-width: 0;
         }
 
         .header-nav-links a {
           font-family: var(--font-display);
           font-weight: 600;
-          font-size: 0.9rem;
+          font-size: clamp(0.8rem, 0.95vw, 0.9rem);
           color: var(--color-text);
           text-decoration: none;
+          white-space: nowrap;
+          flex-shrink: 0;
           transition: color var(--transition-fast);
         }
 
         .header-nav-links a:hover { color: var(--color-green); }
 
-        .header-cta { padding: 0.75rem 1.4rem; font-size: 0.85rem; }
+        .header-cta { padding: 0.75rem 1.4rem; font-size: 0.85rem; flex-shrink: 0; white-space: nowrap; }
 
         .mobile-only { display: none; }
 

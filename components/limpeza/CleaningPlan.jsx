@@ -17,6 +17,7 @@ const CleaningPlan = ({ setCursorState }) => {
         </div>
 
         <div className="cleaning-plan-card">
+          <span className="cleaning-plan-ribbon">Plano único · tudo incluso</span>
           <div className="cleaning-plan-price-col">
             <span className="cleaning-plan-name">{plan.name}</span>
             <div className="cleaning-plan-price-row">
@@ -83,10 +84,31 @@ const CleaningPlan = ({ setCursorState }) => {
           border-radius: 28px;
           overflow: hidden;
           position: relative;
+          border: 2px solid var(--color-yellow);
+          box-shadow: 0 30px 70px -20px rgba(255, 201, 0, 0.35);
+        }
+
+        .cleaning-plan-ribbon {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: var(--color-yellow);
+          color: var(--color-green-deep);
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          font-weight: 500;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          padding: 0.5rem 1.4rem;
+          border-radius: 999px;
+          white-space: nowrap;
+          z-index: 3;
+          box-shadow: 0 6px 16px rgba(0,0,0,0.25);
         }
 
         .cleaning-plan-price-col {
-          padding: clamp(2.25rem, 4vw, 3.5rem);
+          padding: clamp(2.75rem, 4vw, 3.75rem) clamp(2.25rem, 4vw, 3.5rem) clamp(2.25rem, 4vw, 3.5rem);
           display: flex;
           flex-direction: column;
           background: linear-gradient(155deg, var(--color-green-deep) 0%, var(--color-green-dark) 100%);
@@ -107,7 +129,7 @@ const CleaningPlan = ({ setCursorState }) => {
         .cleaning-plan-price {
           font-family: var(--font-display);
           font-weight: 800;
-          font-size: clamp(2.8rem, 5vw, 3.6rem);
+          font-size: clamp(3.1rem, 5.6vw, 4.1rem);
           color: var(--color-offwhite);
           letter-spacing: -0.02em;
         }
@@ -125,7 +147,7 @@ const CleaningPlan = ({ setCursorState }) => {
 
         .cleaning-plan-note { font-size: 0.78rem; color: var(--color-muted-onDark); line-height: 1.5; }
 
-        .cleaning-plan-details-col { padding: clamp(2.25rem, 4vw, 3.5rem); }
+        .cleaning-plan-details-col { padding: clamp(2.75rem, 4vw, 3.75rem) clamp(2.25rem, 4vw, 3.5rem) clamp(2.25rem, 4vw, 3.5rem); }
 
         .cleaning-plan-inclusions { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; margin-bottom: 2.5rem; }
 
