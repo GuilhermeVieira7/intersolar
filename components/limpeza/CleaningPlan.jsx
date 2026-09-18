@@ -90,9 +90,9 @@ const CleaningPlan = ({ setCursorState }) => {
 
         .cleaning-plan-ribbon {
           position: absolute;
-          top: 0;
+          top: 1.1rem;
           left: 50%;
-          transform: translate(-50%, -50%);
+          transform: translateX(-50%);
           background: var(--color-yellow);
           color: var(--color-green-deep);
           font-family: var(--font-mono);
@@ -108,7 +108,7 @@ const CleaningPlan = ({ setCursorState }) => {
         }
 
         .cleaning-plan-price-col {
-          padding: clamp(2.75rem, 4vw, 3.75rem) clamp(2.25rem, 4vw, 3.5rem) clamp(2.25rem, 4vw, 3.5rem);
+          padding: clamp(3.75rem, 5.5vw, 4.5rem) clamp(2.25rem, 4vw, 3.5rem) clamp(2.25rem, 4vw, 3.5rem);
           display: flex;
           flex-direction: column;
           background: linear-gradient(155deg, var(--color-green-deep) 0%, var(--color-green-dark) 100%);
@@ -147,7 +147,7 @@ const CleaningPlan = ({ setCursorState }) => {
 
         .cleaning-plan-note { font-size: 0.78rem; color: var(--color-muted-onDark); line-height: 1.5; }
 
-        .cleaning-plan-details-col { padding: clamp(2.75rem, 4vw, 3.75rem) clamp(2.25rem, 4vw, 3.5rem) clamp(2.25rem, 4vw, 3.5rem); }
+        .cleaning-plan-details-col { padding: clamp(3.75rem, 5.5vw, 4.5rem) clamp(2.25rem, 4vw, 3.5rem) clamp(2.25rem, 4vw, 3.5rem); }
 
         .cleaning-plan-inclusions { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; margin-bottom: 2.5rem; }
 
